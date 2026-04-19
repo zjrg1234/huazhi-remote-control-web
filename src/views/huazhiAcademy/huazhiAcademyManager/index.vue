@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchList } from '@/api/statAnalysis'
+  import { fetchAccountList } from '@/api/statAnalysis'
 
   defineOptions({ name: 'SpecialRecharge' })
 
@@ -91,9 +91,9 @@
   const { data, columns, loading, pagination, handleSizeChange, handleCurrentChange, getData } =
     useTable({
       core: {
-        apiFn: fetchList,
+        apiFn: fetchAccountList,
         apiParams: {
-          current: 1,
+          page: 1,
           size: 20,
           phone: '',
           area: ''

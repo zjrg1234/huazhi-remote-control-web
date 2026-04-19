@@ -44,6 +44,8 @@
         </ArtTable>
       </ElCard>
     </div>
+
+    <CarDetailDialog ref="carDetailDialogRef" />
   </div>
 </template>
 
@@ -51,8 +53,11 @@
   import { useTable } from '@/composables/useTable'
   import { fetchCarList, delCar } from '@/api/carManage'
   import { ElMessageBox } from 'element-plus'
+  import CarDetailDialog from '@/components/CarDetailDialog/index.vue'
 
   defineOptions({ name: 'CarManagerChild' })
+
+  const carDetailDialogRef = ref()
 
   // 表单搜索初始值
   const searchFormState = ref({
@@ -247,6 +252,7 @@
 
   const handleDetail = (row: any) => {
     console.log(row)
+    carDetailDialogRef.value.openDialog(row.id)
   }
 
   const handleDelete = (row: any) => {

@@ -107,7 +107,7 @@
       core: {
         apiFn: fetchGetUserList,
         apiParams: {
-          current: 1,
+          page: 1,
           size: 20
         },
         columnsFactory: () => [
@@ -174,7 +174,7 @@
 
   .operation-buttons {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
+    justify-content: space-between;
   }
 </style>

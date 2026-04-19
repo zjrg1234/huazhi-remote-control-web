@@ -78,7 +78,7 @@
       core: {
         apiFn: fetchList,
         apiParams: {
-          current: 1,
+          page: 1,
           size: 20,
           phone: '',
           area: ''

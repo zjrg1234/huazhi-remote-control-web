@@ -431,7 +431,7 @@
   // 缓存调试状态
   const cacheDebugLogs = ref<string[]>([])
   const requestParams = ref<any>({
-    current: 1,
+    page: 1,
     size: 20,
     name: '',
     phone: '',
@@ -552,18 +552,18 @@
   ])
 
   // 导出列配置
-  const exportColumns = computed(() => ({
-    userName: { title: '用户名', width: 15 },
-    userEmail: { title: '邮箱', width: 20 },
-    userPhone: { title: '手机号', width: 15 },
-    userGender: { title: '性别', width: 10 },
-    department: { title: '部门', width: 15 },
-    status: {
-      title: '状态',
-      width: 10,
-      formatter: (value: string) => getUserStatusConfig(value).text
-    }
-  }))
+  // const exportColumns = computed(() => ({
+  //   userName: { title: '用户名', width: 15 },
+  //   userEmail: { title: '邮箱', width: 20 },
+  //   userPhone: { title: '手机号', width: 15 },
+  //   userGender: { title: '性别', width: 10 },
+  //   department: { title: '部门', width: 15 },
+  //   status: {
+  //     title: '状态',
+  //     width: 10,
+  //     formatter: (value: string) => getUserStatusConfig(value).text
+  //   }
+  // }))
 
   // 获取用户状态配置
   const getUserStatusConfig = (status: string) => {
@@ -667,7 +667,7 @@
         return fetchGetUserList(params)
       },
       apiParams: {
-        current: 1,
+        page: 1,
         size: 20,
         ...searchFormState.value
       },
@@ -675,7 +675,7 @@
       excludeParams: ['daterange'],
       // 自定义分页字段映射，未设置时将使用全局配置 tableConfig.ts 中的 paginationKey
       // paginationKey: {
-      //   current: 'pageNum',
+      //   page: 'pageNum',
       //   size: 'pageSize'
       // },
       immediate: true, // 是否立即加载数据
@@ -1019,9 +1019,9 @@
   }
 
   // 导入导出
-  const handleExportSuccess = (filename: string, count: number) => {
-    ElMessage.success(`导出 ${count} 条数据成功`)
-  }
+  // const handleExportSuccess = (filename: string, count: number) => {
+  //   ElMessage.success(`导出 ${count} 条数据成功`)
+  // }
 
   /**
    * Excel 导入成功处理

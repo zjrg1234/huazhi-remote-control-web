@@ -20,7 +20,7 @@ export function fetchLogin(params: Api.Auth.LoginParams) {
  */
 export function fetchGetUserInfo() {
   return {
-    userId: '1',
+    userId: 1,
     userName: 'admin',
     roles: ['R_SUPER'],
     buttons: ['B_CODE1', 'B_CODE2', 'B_CODE3'],

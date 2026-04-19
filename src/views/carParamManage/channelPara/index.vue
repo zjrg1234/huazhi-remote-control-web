@@ -39,9 +39,9 @@
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchList } from '@/api/statAnalysis'
+  import { fetchAccountList } from '@/api/statAnalysis'
 
-  defineOptions({ name: 'SpecialRecharge' })
+  defineOptions({ name: 'ChannelPara' })
 
   // 表单搜索初始值
   const searchFormState = ref({
@@ -76,7 +76,7 @@
   const { data, columns, loading, pagination, handleSizeChange, handleCurrentChange, getData } =
     useTable({
       core: {
-        apiFn: fetchList,
+        apiFn: fetchAccountList,
         apiParams: {
           page: 1,
           size: 20,

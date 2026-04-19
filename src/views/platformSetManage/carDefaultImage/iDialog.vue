@@ -13,9 +13,9 @@
           <el-select v-model="formData.type" placeholder="请选择类型">
             <el-option
               v-for="item in carImgListOption"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="(item as any).value"
+              :label="(item as any).label"
+              :value="(item as any).value"
             />
           </el-select>
         </el-form-item>

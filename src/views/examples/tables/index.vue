@@ -921,7 +921,7 @@
       数据条数: data.value.length,
       选中条数: selectedRows.value.length,
       列数: columns?.value?.length ?? 0,
-      当前页: pagination.current,
+      当前页: pagination.page,
       每页大小: pagination.size,
       总条数: pagination.total
     }
@@ -1151,11 +1151,11 @@
 
   // 监听分页和搜索状态变化
   watch(
-    () => [pagination.current, pagination.size, searchFormState.value],
-    ([current, size, search]) => {
+    () => [pagination.page, pagination.size, searchFormState.value],
+    ([page, size, search]) => {
       requestParams.value = {
         ...(search as any),
-        current,
+        page,
         size
       }
     },

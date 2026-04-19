@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchOnlineList } from '@/api/userManage'
+  import { fetchList } from '@/api/userManage'
   import type { FormInstance, FormRules } from 'element-plus'
 
   defineOptions({ name: 'AgentRecord' })
@@ -165,11 +165,10 @@
   const { data, columns, loading, pagination, handleSizeChange, handleCurrentChange, getData } =
     useTable({
       core: {
-        apiFn: fetchOnlineList,
+        apiFn: fetchList,
         apiParams: {
           page: 1,
-          size: 20,
-          time: ''
+          size: 20
         },
         columnsFactory: () => [
           {

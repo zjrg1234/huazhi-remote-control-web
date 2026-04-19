@@ -75,7 +75,7 @@
             </div>
             <div class="role-actions">
               <ElButton
-                v-if="currentUser.username !== account.username"
+                v-if="currentUser.userName !== account.username"
                 type="primary"
                 @click="switchRole(account)"
                 :loading="switching"

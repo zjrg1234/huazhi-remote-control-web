@@ -131,24 +131,24 @@
     {
       key: 'super',
       label: t('login.roles.super'),
-      userName: 'Super',
-      password: '123456',
+      userName: '',
+      password: '',
       roles: ['R_SUPER']
-    },
-    {
-      key: 'admin',
-      label: t('login.roles.admin'),
-      userName: 'Admin',
-      password: '123456',
-      roles: ['R_ADMIN']
-    },
-    {
-      key: 'user',
-      label: t('login.roles.user'),
-      userName: 'User',
-      password: '123456',
-      roles: ['R_USER']
     }
+    // {
+    //   key: 'admin',
+    //   label: t('login.roles.admin'),
+    //   userName: 'Admin',
+    //   password: '123456',
+    //   roles: ['R_ADMIN']
+    // },
+    // {
+    //   key: 'user',
+    //   label: t('login.roles.user'),
+    //   userName: 'User',
+    //   password: '123456',
+    //   roles: ['R_USER']
+    // }
   ])
 
   const dragVerify = ref()
@@ -207,7 +207,9 @@
       // 登录请求
       const { username, password } = formData
 
-      const { token, refreshToken } = await fetchLogin({
+      const {
+        data: { token, refreshToken }
+      } = await fetchLogin({
         username,
         password
       })

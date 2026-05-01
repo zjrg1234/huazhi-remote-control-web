@@ -6,7 +6,7 @@ import request from '@/utils/http'
  * @returns 登录响应
  */
 export function fetchLogin(params: Api.Auth.LoginParams) {
-  return request.post<Api.Auth.LoginResponse>({
+  return request.post<any>({
     url: '/backend/login',
     params
     // showSuccessMessage: true // 显示成功消息

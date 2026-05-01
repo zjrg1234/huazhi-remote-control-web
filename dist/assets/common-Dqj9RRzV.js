@@ -1,0 +1,1 @@
+import{aO as a}from"./index-BOGMDJPY.js";function t(t){return a.post({url:"/backend/special/list",params:t})}function n(t){return a.post({url:"/backend/type/list",params:t})}function r(t){return a.post({url:"/backend/agent/type/list",params:t})}function e(t){return a.post({url:"/backend/agent/vehicle/detail",params:t})}export{r as a,e as b,n as c,t as f};

@@ -1,1 +1,0 @@
-import{av as a,a as t,c as l,ag as n}from"./index-D-W1UlMx.js";const u=11,e=2;function i(){const u=a(),e=t(0),i=l(()=>({minWidth:`${Math.max(e.value,11)}px`}));return n(u,()=>{var a,t;e.value=null!=(t=null==(a=u.value)?void 0:a.getBoundingClientRect().width)?t:0}),{calculatorRef:u,calculatorWidth:e,inputStyle:i}}export{e as B,u as M,i as u};

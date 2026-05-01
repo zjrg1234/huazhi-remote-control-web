@@ -1,0 +1,1 @@
+import{aO as r}from"./index-D-W1UlMx.js";function e(e){return r.post({url:"/backend/vehicle/list",params:e})}function a(e){return r.post({url:"/backend/agent/vehicle/delete",params:e})}function n(e){return r.post({url:"/backend/driving/record",params:e})}export{a as d,e as f,n as g};

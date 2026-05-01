@@ -1,1 +1,0 @@
-import{aO as a}from"./index-BOGMDJPY.js";function r(r){return a.post({url:"/backend/payment/list",params:r})}function t(r){return a.post({url:"/backend/withdraw/list",params:r})}function n(r){return a.post({url:"/backend/refund/list",params:r})}function s(r){return a.post({url:"/backend/withdraw/audit",params:r})}export{n as a,t as b,r as f,s as w};

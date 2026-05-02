@@ -85,12 +85,12 @@
               </ElButton>
             </div>
 
-            <div class="footer">
+            <!-- <div class="footer">
               <p>
                 {{ $t('login.noAccount') }}
                 <RouterLink :to="{ name: 'Register' }">{{ $t('login.register') }}</RouterLink>
               </p>
-            </div>
+            </div> -->
           </ElForm>
         </div>
       </div>

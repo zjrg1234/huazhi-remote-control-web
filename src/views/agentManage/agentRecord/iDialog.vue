@@ -87,6 +87,14 @@
             <el-radio label="2" :value="0">否</el-radio>
           </el-radio-group>
         </el-form-item>
+
+        <el-form-item label="app显示端" prop="type">
+          <el-radio-group v-model="formData.type" :disabled="formData.flag == 0">
+            <el-radio label="2" :value="3">全部</el-radio>
+            <el-radio label="1" :value="1">IOS</el-radio>
+            <el-radio label="2" :value="2">Android</el-radio>
+          </el-radio-group>
+        </el-form-item>
       </el-form>
     </div>
     <template #footer>
@@ -123,7 +131,8 @@
     first_handling_fee: '',
     company_handling_fee: '',
     balance: '',
-    venue_quantity: ''
+    venue_quantity: '',
+    type: ''
   })
   const rules = computed<FormRules>(() => ({
     level: [{ required: true, message: '代理商等级', trigger: 'blur' }],
@@ -131,7 +140,8 @@
     create_site_quantity: [{ required: true, message: '请输入可创建场地总数', trigger: 'blur' }],
     is_support: [{ required: true, message: '请选择是否自营', trigger: 'blur' }],
     head_shot: [{ required: true, message: '请上传头像', trigger: 'blur' }],
-    agent_name: [{ required: true, message: '请输入昵称', trigger: 'blur' }]
+    agent_name: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
+    type: [{ required: true, message: '请选择app显示端', trigger: 'blur' }]
   }))
 
   // -1 add 0 view 1 edit
@@ -157,7 +167,8 @@
       company_handling_fee: '',
       balance: '',
       venue_quantity: '',
-      superior_agent_name: ''
+      superior_agent_name: '',
+      type: ''
     }
     // add
     if (row.flag == -1) {

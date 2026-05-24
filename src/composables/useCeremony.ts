@@ -50,7 +50,7 @@ export function useCeremony() {
           // 主页显示节日文本
           useTimeoutFn(() => {
             settingStore.setShowFestivalText(true)
-           // setFestivalDate()
+            // setFestivalDate()
           }, FESTIVAL_CONFIG.TEXT_DELAY)
         }
       }, FESTIVAL_CONFIG.FIREWORK_INTERVAL)

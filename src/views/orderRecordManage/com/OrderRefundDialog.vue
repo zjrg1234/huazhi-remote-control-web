@@ -153,9 +153,9 @@
     }
   })
 
-  const handleAdd = () => {
-    innerVisible.value = true
-  }
+  // const handleAdd = () => {
+  //   innerVisible.value = true
+  // }
 
   const handleChange = (val: any) => {
     console.log(val)
@@ -203,6 +203,6 @@
 
 <style lang="scss" scoped>
   :deep(.cell) {
-    padding: 0px;
+    padding: 0;
   }
 </style>

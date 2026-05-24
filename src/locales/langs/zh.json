@@ -308,12 +308,12 @@
       "document": "官方文档",
       "liteVersion": "精简版本"
     },
-     "statAnalysis": {
+    "statAnalysis": {
       "title": "统计分析",
       "specialRecharge": "专区充值统计",
       "specialUserRecharge": "专区用户数量统计"
     },
-     "usermanage": {
+    "usermanage": {
       "title": "用户管理",
       "userManage": "用户管理",
       "userBalanceEditRecord": "用户余额修改记录",
@@ -351,34 +351,33 @@
       "title": "活动公告",
       "actNotManage": "活动公告管理"
     },
-     "rechargeActManage": {
+    "rechargeActManage": {
       "title": "充值活动",
       "rechargeActManage": "充值活动管理",
       "rechargeActRec": "充值活动记录"
     },
-     "huazhiAcademy": {
+    "huazhiAcademy": {
       "title": "华智学堂",
       "huazhiAcademyManager": "华智学堂管理"
     },
-     "carManager": {
+    "carManager": {
       "title": "车辆管理",
       "carManager": "车辆管理",
       "driverRecord": "驾驶记录",
       "tagManager": "标签管理",
       "malfunctionRecord": "故障记录"
     },
-     "carParamManage": {
+    "carParamManage": {
       "title": "车辆参数",
       "channelPara": "通道参数",
-      "carBasicPara": "车辆基础参数"  
+      "carBasicPara": "车辆基础参数"
     },
-     "financeManage": {
+    "financeManage": {
       "title": "财务管理",
       "rechargeRecord": "支付记录",
       "withdrawRecord": "提现记录",
       "refundRecord": "退款记录"
     }
-   
   },
   "table": {
     "form": {

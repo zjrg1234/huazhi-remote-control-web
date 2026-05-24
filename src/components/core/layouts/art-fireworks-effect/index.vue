@@ -5,8 +5,8 @@
 
 <script setup lang="ts">
   import { useEventListener } from '@vueuse/core'
-  import { mittBus } from '@/utils/sys'
-  import type { Handler } from 'mitt'
+  // import { mittBus } from '@/utils/sys'
+  // import type { Handler } from 'mitt'
   import bp from '@/assets/img/ceremony/hb.png'
   import sd from '@/assets/img/ceremony/sd.png'
   import yd from '@/assets/img/ceremony/yd.png'
@@ -590,16 +590,6 @@
     canvasRef.value.width = innerWidth
     canvasRef.value.height = innerHeight
     fireworkSystem.updateCanvasSize(innerWidth, innerHeight)
-  }
-
-  /**
-   * 处理外部触发的烟花事件
-   * 通过 mittBus 事件总线接收触发指令
-   * @param event 事件数据，可能包含图片URL
-   */
-  const handleFireworkTrigger: Handler<unknown> = (event: unknown) => {
-    const imageUrl = event as string | undefined
-    fireworkSystem.createFirework(imageUrl)
   }
 
   // ==================== 生命周期 ====================

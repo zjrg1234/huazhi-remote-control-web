@@ -48,8 +48,6 @@
 
   const ANIMATION_DELAY = 100
 
-  const radio2 = ref('本月')
-
   /**
    * 新用户表格数据
    * 包含用户基本信息和完成进度
@@ -138,9 +136,9 @@
       border-bottom: none !important;
     }
 
-    :deep(.el-table__inner-wrapper:before) {
-      border: none;
+    :deep(.el-table__inner-wrapper::before) {
       background-color: transparent;
+      border: none;
     }
 
     :deep(.el-table) {
@@ -151,6 +149,7 @@
       margin-left: 10px;
     }
   }
+
   .tr {
     text-align: right;
   }

@@ -188,15 +188,12 @@
   import { useRouter } from 'vue-router'
   import { ElMessageBox } from 'element-plus'
   import { useFullscreen, useWindowSize } from '@vueuse/core'
-  import { LanguageEnum, MenuTypeEnum } from '@/enums/appEnum'
+  import { MenuTypeEnum } from '@/enums/appEnum'
   import { useSettingStore } from '@/store/modules/setting'
   import { useUserStore } from '@/store/modules/user'
   import { useMenuStore } from '@/store/modules/menu'
   import AppConfig from '@/config'
-  import { languageOptions } from '@/locales'
-  import { WEB_LINKS } from '@/utils/constants'
   import { mittBus } from '@/utils/sys'
-  import { themeAnimation } from '@/utils/theme/animation'
   import { useCommon } from '@/composables/useCommon'
   import { useHeaderBar } from '@/composables/useHeaderBar'
 
@@ -221,15 +218,13 @@
     shouldShowBreadcrumb,
     shouldShowGlobalSearch,
     shouldShowFullscreen,
-    shouldShowNotification,
-    shouldShowChat,
-    shouldShowLanguage,
+
     shouldShowSettings,
-    shouldShowThemeToggle,
+
     fastEnterMinWidth: headerBarFastEnterMinWidth
   } = useHeaderBar()
 
-  const { menuOpen, systemThemeColor, showSettingGuide, menuType, isDark, tabStyle } =
+  const { menuOpen, systemThemeColor, showSettingGuide, menuType, tabStyle } =
     storeToRefs(settingStore)
 
   const { language, getUserInfo: userInfo } = storeToRefs(userStore)
@@ -274,23 +269,23 @@
    * 页面跳转
    * @param {string} path - 目标路径
    */
-  const goPage = (path: string): void => {
-    router.push(path)
-  }
+  // const goPage = (path: string): void => {
+  //   router.push(path)
+  // }
 
   /**
    * 打开文档页面
    */
-  const toDocs = (): void => {
-    window.open(WEB_LINKS.DOCS)
-  }
+  // const toDocs = (): void => {
+  //   window.open(WEB_LINKS.DOCS)
+  // }
 
   /**
    * 打开 GitHub 页面
    */
-  const toGithub = (): void => {
-    window.open(WEB_LINKS.GITHUB)
-  }
+  // const toGithub = (): void => {
+  //   window.open(WEB_LINKS.GITHUB)
+  // }
 
   /**
    * 跳转到首页
@@ -336,12 +331,12 @@
    * 切换系统语言
    * @param {LanguageEnum} lang - 目标语言类型
    */
-  const changeLanguage = (lang: LanguageEnum): void => {
-    if (locale.value === lang) return
-    locale.value = lang
-    userStore.setLanguage(lang)
-    reload(50)
-  }
+  // const changeLanguage = (lang: LanguageEnum): void => {
+  //   if (locale.value === lang) return
+  //   locale.value = lang
+  //   userStore.setLanguage(lang)
+  //   reload(50)
+  // }
 
   /**
    * 打开设置面板
@@ -383,23 +378,23 @@
   /**
    * 切换通知面板显示状态
    */
-  const visibleNotice = (): void => {
-    showNotice.value = !showNotice.value
-  }
+  // const visibleNotice = (): void => {
+  //   showNotice.value = !showNotice.value
+  // }
 
   /**
    * 打开聊天窗口
    */
-  const openChat = (): void => {
-    mittBus.emit('openChat')
-  }
+  // const openChat = (): void => {
+  //   mittBus.emit('openChat')
+  // }
 
   /**
    * 打开锁屏功能
    */
-  const lockScreen = (): void => {
-    mittBus.emit('openLockScreen')
-  }
+  // const lockScreen = (): void => {
+  //   mittBus.emit('openLockScreen')
+  // }
 
   /**
    * 关闭用户菜单弹出层

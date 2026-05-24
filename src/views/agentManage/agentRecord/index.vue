@@ -309,7 +309,7 @@
         id: command.id
       })
     } else if (command.type == 3) {
-      editPwdDialogRef.value.openDialog(command)
+      editPwdDialogRef.value.openDialog({ ...command, type: 1 })
     } else if (command.type == 4) {
       agentFreeze({
         id: command.id
@@ -361,7 +361,7 @@
 
 <style lang="scss" scoped>
   :deep(.cell) {
-    padding: 0px;
+    padding: 0;
   }
 
   .content {

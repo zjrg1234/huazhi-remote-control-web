@@ -222,6 +222,6 @@
 
 <style lang="scss" scoped>
   :deep(.cell) {
-    padding: 0px;
+    padding: 0;
   }
 </style>

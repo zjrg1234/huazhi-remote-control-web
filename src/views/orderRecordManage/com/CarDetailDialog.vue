@@ -223,11 +223,11 @@
     .section-title {
       display: flex;
       align-items: center;
+      padding-left: 4px;
+      margin-bottom: 12px;
       font-size: 16px;
       font-weight: 600;
       color: #303133;
-      margin-bottom: 12px;
-      padding-left: 4px;
       border-left: 4px solid #409eff; // 左侧蓝色装饰条
 
       .el-icon {
@@ -242,8 +242,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    cursor: pointer;
     color: #606266;
+    cursor: pointer;
 
     &:hover {
       color: #409eff;
@@ -262,7 +262,7 @@
 
   // 等宽字体，用于序列号
   .mono-font {
-    font-family: 'Consolas', 'Monaco', monospace;
+    font-family: Consolas, Monaco, monospace;
   }
 
   // 硬件卡片样式
@@ -275,38 +275,38 @@
 
     .card-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-weight: bold;
+      justify-content: space-between;
       font-size: 14px;
+      font-weight: bold;
       color: #606266;
     }
 
     .hardware-value {
-      text-align: center;
       padding: 10px 0;
       font-size: 16px;
-      color: #303133;
       font-weight: 500;
+      color: #303133;
+      text-align: center;
     }
   }
 
   // 统计数值样式
   .statistic-item {
-    background: #f5f7fa;
-    border-radius: 4px;
-    padding: 15px;
-    text-align: center;
-    height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+    padding: 15px;
+    text-align: center;
+    background: #f5f7fa;
+    border-radius: 4px;
 
     .label {
+      margin-bottom: 5px;
       font-size: 13px;
       color: #909399;
-      margin-bottom: 5px;
     }
 
     .value {
@@ -315,29 +315,29 @@
       color: #409eff;
 
       .unit {
+        margin-left: 2px;
         font-size: 12px;
         font-weight: normal;
         color: #909399;
-        margin-left: 2px;
       }
     }
   }
 
   // 混控状态行
   .mix-control-row {
-    margin-top: 15px;
-    padding: 10px 15px;
-    background: #fdf6ec; // 轻微的背景色提示
-    border-radius: 4px;
     display: flex;
     align-items: center;
+    padding: 10px 15px;
+    margin-top: 15px;
+    background: #fdf6ec; // 轻微的背景色提示
     border: 1px solid #faecd8;
+    border-radius: 4px;
 
     .label {
-      font-size: 14px;
-      color: #e6a23c;
       margin-right: 10px;
+      font-size: 14px;
       font-weight: 500;
+      color: #e6a23c;
     }
   }
 

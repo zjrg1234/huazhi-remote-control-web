@@ -22,10 +22,11 @@
 
 <script setup lang="ts">
   import { editPwd } from '@/api/userManage'
+  import { editAgentPwd } from '@/api/agentManage'
 
   defineOptions({ name: 'EditPwdDialog' })
   const dialogFormVisible = ref(false)
-
+  const type = ref(1)
   // 表单搜索初始值
   const form = ref({
     phone: '',
@@ -34,11 +35,20 @@
   })
 
   const handleSubmit = async () => {
-    const res = await editPwd({
-      password: form.value.password,
-      id: form.value.id,
-      phone: form.value.phone
-    })
+    let res: any
+    if (type.value == 1) {
+      res = await editAgentPwd({
+        password: form.value.password,
+        id: form.value.id,
+        phone: form.value.phone
+      })
+    } else {
+      res = await editPwd({
+        password: form.value.password,
+        id: form.value.id,
+        phone: form.value.phone
+      })
+    }
     if (res.code === 200) {
       ElMessage.success('修改成功')
     } else {
@@ -48,8 +58,8 @@
   }
 
   const openDialog = (params: any) => {
-    console.log(params)
     dialogFormVisible.value = true
+    type.value = params.type
     form.value = {
       ...params,
       phone: params.phone_number || '',

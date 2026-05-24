@@ -133,8 +133,9 @@
   :deep(.el-form-item--default) {
     margin-bottom: 15px !important;
   }
+
   :deep(.el-icon.avatar-uploader-icon) {
-    height: 100px !important;
     width: 100px !important;
+    height: 100px !important;
   }
 </style>

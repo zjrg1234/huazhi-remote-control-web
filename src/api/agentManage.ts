@@ -106,3 +106,10 @@ export function getCarList(params: any) {
     params
   })
 }
+
+export function editAgentPwd(params: any) {
+  return request.post<any>({
+    url: '/backend/agent/change/password',
+    params
+  })
+}

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" :title="text" width="700px">
+  <el-dialog v-model="dialogVisible" :title="text" width="700px" @closed="handleDialogClosed">
     <!-- :before-close="handleClose" -->
     <div>
       <el-form
@@ -20,6 +20,24 @@
             <el-option label="二级" :value="2" />
           </el-select>
         </el-form-item>
+
+        <el-form-item
+          label="上级代理商"
+          prop="superior_agent_id"
+          :required="formData.level == 2"
+          v-if="formData.flag != 0 && formData.level == 2"
+        >
+          <el-select v-model="formData.superior_agent_id" placeholder="请选择代理商等级">
+            <el-option
+              :value="(item as any).id"
+              :label="(item as any).agent_name"
+              v-for="(item, index) in agentList"
+              :key="index"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="上级代理商" v-if="formData.flag == 0">
           <el-input v-model="formData.superior_agent_name" :disabled="formData.flag == 0" />
         </el-form-item>
@@ -38,19 +56,22 @@
             placeholder="请输入昵称"
           />
         </el-form-item>
-        <el-form-item label="头像" prop="head_shot">
+        <el-form-item label="头像" prop="head_shot" :required="formData.level == 1">
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
             :show-file-list="false"
             :limit="1"
+            :headers="uploadHeaders"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
             :disabled="formData.flag == 0"
             name="imageFile[]"
           >
             <img v-if="formData.head_shot" :src="formData.head_shot" class="avatar" />
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <el-icon v-else class="avatar-uploader-icon">
+              <Plus />
+            </el-icon>
           </el-upload>
         </el-form-item>
         <el-form-item label="余额" prop="balance" v-if="formData.flag == 0">
@@ -107,10 +128,12 @@
 </template>
 
 <script setup lang="ts">
-  import { agentCreate, agentUpdate, agentDetail } from '@/api/agentManage'
+  import { agentCreate, agentUpdate, agentDetail, fetchList } from '@/api/agentManage'
   import { Plus } from '@element-plus/icons-vue'
   import type { UploadProps } from 'element-plus'
   import { ElButton, ElRadioGroup, type FormInstance, type FormRules } from 'element-plus'
+  import { useUserStore } from '@/store/modules/user'
+  const userStore = useUserStore()
 
   const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/picture`
   defineOptions({ name: 'AgentRecordDialog' })
@@ -118,14 +141,14 @@
   const dialogVisible = ref(false)
   const formData = ref({
     id: 0,
-    level: '',
+    level: 1,
     superior_agent_name: '',
-    superior_agent_id: 0,
+    superior_agent_id: '',
     phone_number: '',
     head_shot: '',
     create_site_quantity: '',
     sorting: '',
-    is_support: '',
+    is_support: 1,
     agent_name: '',
     flag: 0,
     first_handling_fee: '',
@@ -134,19 +157,56 @@
     venue_quantity: '',
     type: ''
   })
-  const rules = computed<FormRules>(() => ({
-    level: [{ required: true, message: '代理商等级', trigger: 'blur' }],
-    phone_number: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
-    create_site_quantity: [{ required: true, message: '请输入可创建场地总数', trigger: 'blur' }],
-    is_support: [{ required: true, message: '请选择是否自营', trigger: 'blur' }],
-    head_shot: [{ required: true, message: '请上传头像', trigger: 'blur' }],
-    agent_name: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
-    type: [{ required: true, message: '请选择app显示端', trigger: 'blur' }]
-  }))
+  const rules = computed<FormRules>(() => {
+    // 头像的自定义校验函数
+    const validateHeadShot = (rule: any, value: any, callback: any) => {
+      if (formData.value.level == 2) {
+        callback()
+      } else {
+        if (!value) {
+          callback(new Error('请上传头像'))
+        } else {
+          callback()
+        }
+      }
+    }
 
+    // 新增：上级代理商的自定义校验函数
+    const validateSuperiorAgent = (rule: any, value: any, callback: any) => {
+      // 只有当选中二级代理商（level === 2）时，上级代理商才必填
+      if (formData.value.level == 2) {
+        if (!value) {
+          callback(new Error('请选择上级代理商'))
+        } else {
+          callback()
+        }
+      } else {
+        // 不是二级代理商时，直接通过校验
+        callback()
+      }
+    }
+
+    return {
+      level: [{ required: true, message: '请选择代理商等级', trigger: 'change' }],
+      phone_number: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+      create_site_quantity: [{ required: true, message: '请输入可创建场地总数', trigger: 'blur' }],
+      is_support: [{ required: true, message: '请选择是否自营', trigger: 'change' }],
+      head_shot: [{ validator: validateHeadShot, trigger: 'change' }],
+      // 新增：上级代理商的校验规则
+      superior_agent_id: [{ validator: validateSuperiorAgent, trigger: 'blur' }],
+      agent_name: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
+      type: [{ required: true, message: '请选择app显示端', trigger: 'change' }]
+    }
+  })
+  const agentList = ref([])
   // -1 add 0 view 1 edit
   const text = computed(() => {
     return formData.value.flag == -1 ? '新增' : formData.value.flag == 0 ? '查看' : '编辑'
+  })
+
+  // 定义上传请求头
+  const uploadHeaders = ref({
+    Authorization: userStore.accessToken // 99% 后端都是这个格式
   })
 
   const openDialog = (row: any) => {
@@ -154,13 +214,13 @@
     // -1 add 0 view 1 edit
     formData.value = {
       id: 0,
-      level: '',
-      superior_agent_id: 0,
+      level: 1,
+      superior_agent_id: '',
       phone_number: '',
       head_shot: '',
       create_site_quantity: '',
       sorting: '',
-      is_support: '',
+      is_support: 1,
       agent_name: '',
       flag: 0,
       first_handling_fee: '',
@@ -192,6 +252,17 @@
           ElMessage.error(err.msg)
         })
     }
+
+    fetchList({
+      page: 1,
+      size: 999,
+      level: 1
+    }).then((res) => {
+      console.log(res.data.content)
+      agentList.value = res.data.content || []
+    })
+
+    handleDialogClosed()
   }
   const emit = defineEmits(['refresh'])
   const resetForm = () => {
@@ -232,7 +303,12 @@
           )
           res = await agentCreate(addFormData1)
         } else if (formData.value.flag == 1) {
-          res = await agentUpdate(formData.value)
+          let obj = { ...formData.value }
+          if (formData.value.level == 1) {
+            obj.superior_agent_id = ''
+            obj.superior_agent_name = '掌控视界'
+          }
+          res = await agentUpdate(obj)
         }
         if (formData.value.flag != 0) {
           if (res.code == 200) {
@@ -269,6 +345,15 @@
     return true
   }
 
+  const handleDialogClosed = () => {
+    nextTick(() => {
+      // 安全判断 formRef 是否存在
+      if (formRef.value) {
+        formRef.value.clearValidate()
+      }
+    })
+    console.log(12)
+  }
   defineExpose({
     openDialog
   })

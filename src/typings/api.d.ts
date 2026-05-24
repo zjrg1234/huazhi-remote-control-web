@@ -288,10 +288,11 @@ declare namespace Api {
       is_support: any
       support_status: any
       is_frozen: any
+      level: any
       superior_agent_name: ''
     }
 
-    type SearchParams = Partial<Pick<ListItem, 'is_cancel'> & Api.Common.CommonSearchParams>
+    type SearchParams = Partial<Pick<ListItem, 'level'> & Api.Common.CommonSearchParams>
 
     type SearchBalanceParams = Partial<Pick<ListItem, 'type'> & Api.Common.CommonSearchParams>
     type SearchVenueParams = Partial<

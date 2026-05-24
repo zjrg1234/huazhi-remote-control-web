@@ -49,6 +49,8 @@ Code Standards: Eslint, Prettier, Stylelint, Husky, Lint-staged, cz-git
 
 ## Installation & Setup
 
+# "fix": "eslint --fix",
+
 ```bash
 # Install dependencies
 pnpm install

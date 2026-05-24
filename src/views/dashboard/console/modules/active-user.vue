@@ -35,7 +35,7 @@
     width: 100%;
     height: 343px;
     padding: 16px;
-    padding-top: 0px;
+    padding-top: 0;
 
     .chart {
       box-sizing: border-box;

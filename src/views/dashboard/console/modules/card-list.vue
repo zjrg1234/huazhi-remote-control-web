@@ -114,11 +114,12 @@
         align-items: center;
         margin-top: 20px;
         border-top: 1px solid #f5f5f5;
+
         .change-text {
           display: block;
+          padding-top: 10px;
           font-size: 13px;
           color: var(--art-text-gray-600);
-          padding-top: 10px;
         }
 
         .change {

@@ -126,7 +126,7 @@ export const useSettingStore = defineStore(
      */
     const isShowFireworks = computed((): boolean => {
       // return festivalDate.value === useCeremony().currentFestivalData.value?.date ? false : true
-      return false;
+      return false
     })
 
     /**

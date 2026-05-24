@@ -23,6 +23,7 @@
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
+            :headers="uploadHeaders"
             :show-file-list="false"
             :limit="1"
             ref="uploadRef"
@@ -58,7 +59,9 @@
   import type { UploadInstance, UploadProps } from 'element-plus'
   import { ElButton, ElRadioGroup, type FormInstance, type FormRules } from 'element-plus'
   const uploadRef = ref<UploadInstance>()
-
+  import { useUserStore } from '@/store/modules/user'
+  const userStore = useUserStore()
+  // 定义上传请求头
   const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/picture`
 
   defineProps({
@@ -75,6 +78,9 @@
     status: [{ required: true, message: '请选择状态', trigger: 'blur' }]
   }))
 
+  const uploadHeaders = ref({
+    Authorization: userStore.accessToken // 99% 后端都是这个格式
+  })
   // -1 add 0 view 1 edit
   const flag = ref(-1)
   const dialogVisible = ref(false)

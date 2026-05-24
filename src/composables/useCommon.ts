@@ -36,7 +36,7 @@ export function useCommon() {
 
   // 设置容器高度CSS变量
   const setContainerHeightCssVar = () => {
-    const height = containerMinHeight.value;
+    const height = containerMinHeight.value
     document.documentElement.style.setProperty('--art-full-height', height)
   }
 

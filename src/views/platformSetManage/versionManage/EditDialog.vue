@@ -26,6 +26,7 @@
           <el-upload
             ref="upload"
             class="upload-demo"
+            :headers="uploadHeaders"
             :action="uploadImageUrl"
             :limit="1"
             :on-success="handleAvatarSuccess"
@@ -79,10 +80,11 @@
 <script setup lang="ts">
   import { ElButton, ElRadioGroup, type FormInstance, type FormRules } from 'element-plus'
   import { addVersion, editVersion } from '@/api/platformSetManage'
-
   import type { UploadInstance, UploadProps } from 'element-plus'
-  const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/file`
+  import { useUserStore } from '@/store/modules/user'
+  const userStore = useUserStore()
 
+  const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/file`
   const upload = ref<UploadInstance>()
 
   defineOptions({ name: 'EditComQDialog' })
@@ -114,8 +116,12 @@
     status: [{ required: true, message: '请选择状态', trigger: 'change' }]
   }))
 
+  // 定义上传请求头
+  const uploadHeaders = ref({
+    Authorization: userStore.accessToken // 99% 后端都是这个格式
+  })
+
   const openDialog = (row: any) => {
-    console.log(row)
     dialogVisible.value = true
     if (row) {
       formData.value = { ...row }

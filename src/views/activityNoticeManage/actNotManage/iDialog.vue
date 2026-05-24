@@ -21,13 +21,16 @@
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
+            :headers="uploadHeaders"
             name="imageFile[]"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
             <img v-if="formData.activity_image" :src="formData.activity_image" class="avatar" />
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <el-icon v-else class="avatar-uploader-icon">
+              <Plus />
+            </el-icon>
           </el-upload>
         </el-form-item>
         <el-form-item label=" ">
@@ -53,13 +56,16 @@
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
+            :headers="uploadHeaders"
             :show-file-list="false"
             name="imageFile[]"
             :on-success="handleAvatarSuccess1"
             :before-upload="beforeAvatarUpload"
           >
             <img v-if="formData.index_image" :src="formData.index_image" class="avatar" />
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <el-icon v-else class="avatar-uploader-icon">
+              <Plus />
+            </el-icon>
           </el-upload>
         </el-form-item>
         <el-form-item label=" ">
@@ -78,10 +84,13 @@
             :show-file-list="false"
             :on-success="handleAvatarSuccess2"
             :before-upload="beforeAvatarUpload"
+            :headers="uploadHeaders"
             name="imageFile[]"
           >
             <img v-if="formData.discover_image" :src="formData.discover_image" class="avatar" />
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            <el-icon v-else class="avatar-uploader-icon">
+              <Plus />
+            </el-icon>
           </el-upload>
         </el-form-item>
         <el-form-item label=" ">
@@ -117,7 +126,8 @@
   import { Plus } from '@element-plus/icons-vue'
   import type { UploadProps } from 'element-plus'
   import { ElButton, ElRadioGroup, type FormInstance, type FormRules } from 'element-plus'
-
+  import { useUserStore } from '@/store/modules/user'
+  const userStore = useUserStore()
   const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/picture`
   const formRef = ref<FormInstance>()
 
@@ -132,6 +142,11 @@
   }))
   const txt = computed(() => {
     return flag.value == 0 ? '查看' : flag.value == 1 ? '编辑' : '添加'
+  })
+
+  // 定义上传请求头
+  const uploadHeaders = ref({
+    Authorization: userStore.accessToken // 99% 后端都是这个格式
   })
 
   // -1 add 0 view 1 edit
@@ -277,8 +292,9 @@
   :deep(.el-form-item--default) {
     margin-bottom: 15px !important;
   }
+
   :deep(.el-icon.avatar-uploader-icon) {
-    height: 100px !important;
     width: 100px !important;
+    height: 100px !important;
   }
 </style>

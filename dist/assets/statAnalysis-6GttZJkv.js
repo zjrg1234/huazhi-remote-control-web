@@ -1,1 +1,0 @@
-import{aO as a}from"./index-_I9HfxTR.js";function s(s){return a.post({url:"/backend/special/account/list",params:s})}function t(s){return a.post({url:"/backend/special/deposit/list",params:s})}export{t as a,s as f};

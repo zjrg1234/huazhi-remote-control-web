@@ -450,22 +450,26 @@
 
 <style lang="scss" scoped>
   :deep(.cell) {
-    padding: 0px;
+    padding: 0;
   }
+
   .img {
     width: 30px;
     height: 30px;
+
     img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
     }
   }
+
   .operation-buttons {
     display: flex;
-    justify-content: space-around;
     align-items: baseline;
+    justify-content: space-around;
   }
+
   .content {
     padding-right: 25px;
   }

@@ -1,1 +1,0 @@
-import{aO as r}from"./index-_I9HfxTR.js";function a(a){return r.post({url:"/backend/reservation/record",params:a})}function n(a){return r.post({url:"/backend/complaint/record",params:a})}function t(a){return r.post({url:"/backend/complaint/update",params:a})}function e(a){return r.post({url:"/backend/refund/record",params:a})}export{a,n as f,e as g,t as h};

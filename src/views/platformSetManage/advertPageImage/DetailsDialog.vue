@@ -16,6 +16,7 @@
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
+            :headers="uploadHeaders"
             :show-file-list="false"
             :limit="1"
             ref="uploadRef"
@@ -53,7 +54,8 @@
   import { ElMessage } from 'element-plus'
   import { Plus } from '@element-plus/icons-vue'
   import type { UploadProps } from 'element-plus'
-
+  import { useUserStore } from '@/store/modules/user'
+  const userStore = useUserStore()
   defineOptions({ name: 'AdvertPageImageDetailsDialog' })
   const uploadImageUrl = `${import.meta.env.VITE_API_PROXY_URL}/backend/upload/picture`
   const uploadRef = ref()
@@ -66,11 +68,13 @@
     status: 1
   })
   const txt = ref('')
-
   const imageUrl = ref('')
-
   const emit = defineEmits(['refresh'])
 
+  // 定义上传请求头
+  const uploadHeaders = ref({
+    Authorization: userStore.accessToken // 99% 后端都是这个格式
+  })
   const handleClose = () => {
     uploadRef.value?.clearFiles()
     dialogVisible.value = false

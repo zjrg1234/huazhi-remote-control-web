@@ -236,7 +236,6 @@
   transform: none !important;
 }
 
-
 .top-right-dialog {
   position: fixed !important;
   top: 0px !important;
@@ -251,11 +250,10 @@
 }
 
 .operation-buttons {
-    display: flex;
-    justify-content: space-around;
-    align-items: baseline;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
 }
-
 
 .avatar-uploader .avatar {
   width: 135px;

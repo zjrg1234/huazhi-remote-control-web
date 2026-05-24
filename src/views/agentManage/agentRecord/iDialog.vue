@@ -206,7 +206,7 @@
 
   // 定义上传请求头
   const uploadHeaders = ref({
-    Authorization: userStore.accessToken // 99% 后端都是这个格式
+    Authorization: userStore.accessToken
   })
 
   const openDialog = (row: any) => {
@@ -352,7 +352,6 @@
         formRef.value.clearValidate()
       }
     })
-    console.log(12)
   }
   defineExpose({
     openDialog

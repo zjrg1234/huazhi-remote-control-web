@@ -146,7 +146,7 @@
 
   // 定义上传请求头
   const uploadHeaders = ref({
-    Authorization: userStore.accessToken // 99% 后端都是这个格式
+    Authorization: userStore.accessToken
   })
 
   // -1 add 0 view 1 edit

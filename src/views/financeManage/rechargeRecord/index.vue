@@ -210,12 +210,13 @@
           prop: 'third_order_no',
           label: '三方单号',
           align: 'center',
-          width: 200
+          width: 240
         },
         {
           prop: 'user_name',
           label: '用户昵称',
-          align: 'center'
+          align: 'center',
+          showTooltip: true
         },
         {
           prop: 'phone_number',

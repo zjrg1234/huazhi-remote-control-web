@@ -203,7 +203,14 @@
         {
           prop: 'order_no',
           label: '支付单号',
-          align: 'center'
+          align: 'center',
+          width: 240
+        },
+        {
+          prop: 'third_order_no',
+          label: '三方单号',
+          align: 'center',
+          width: 200
         },
         {
           prop: 'user_name',
@@ -213,7 +220,8 @@
         {
           prop: 'phone_number',
           label: '用户电话',
-          align: 'center'
+          align: 'center',
+          showTooltip: true
         },
         {
           prop: 'pay_type',

@@ -13,7 +13,7 @@
         <el-form-item label="版本号" prop="version_mark">
           <el-input v-model="formData.version_mark" placeholder="请输入版本号" />
         </el-form-item>
-        <el-form-item label="版本编码" prop="version_coding">
+        <el-form-item label="版本编码">
           <el-input v-model="formData.version_coding" placeholder="请输入版本编码" />
         </el-form-item>
         <el-form-item label="APP类型" prop="type">
@@ -22,7 +22,7 @@
             <el-radio label="2" :value="2">安卓</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="升级包URL" prop="app_url">
+        <el-form-item label="升级包URL">
           <el-upload
             ref="upload"
             class="upload-demo"
@@ -108,9 +108,9 @@
 
   const rules = computed<FormRules>(() => ({
     version_mark: [{ required: true, message: '请输入版本号', trigger: 'blur' }],
-    version_coding: [{ required: true, message: '请输入版本编码', trigger: 'blur' }],
+    // version_coding: [{ required: true, message: '请输入版本编码', trigger: 'blur' }],
     type: [{ required: true, message: '请选择APP类型', trigger: 'change' }],
-    app_url: [{ required: true, message: '请输入升级包URL', trigger: 'blur' }],
+    // app_url: [{ required: true, message: '请输入升级包URL', trigger: 'blur' }],
     is_change_special: [{ required: true, message: '请选择是否转区', trigger: 'change' }],
     forced_updating: [{ required: true, message: '请选择是否强制更新', trigger: 'change' }],
     status: [{ required: true, message: '请选择状态', trigger: 'change' }]

@@ -196,7 +196,7 @@
           width: 60
         },
         {
-          prop: 'agent_name',
+          prop: 'special_area_name',
           label: '专区',
           align: 'center'
         },
@@ -211,7 +211,7 @@
           align: 'center'
         },
         {
-          prop: 'phone',
+          prop: 'phone_number',
           label: '用户电话',
           align: 'center'
         },
@@ -225,19 +225,18 @@
           }
         },
         {
-          prop: 'pay_amount',
+          prop: 'amount',
           label: '支付金额',
-          align: 'center',
-          useSlot: true
+          align: 'center'
         },
         {
-          prop: 'pay_time',
+          prop: 'finish_time',
           label: '支付时间',
           align: 'center',
           showTooltip: true
         },
         {
-          prop: 'create_time',
+          prop: 'time',
           label: '提交时间',
           align: 'center',
           showTooltip: true

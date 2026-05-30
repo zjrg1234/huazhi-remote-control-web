@@ -66,7 +66,8 @@
   import {
     ORDER_STATUS_OPTIONS,
     APPEAL_STATUS_OPTIONS,
-    BILLING_TYPE_OPTIONS
+    BILLING_TYPE_OPTIONS,
+    PAYMENT_TYPE_OPTIONS
   } from '@/config/constant'
   // import { ArrowDown } from '@element-plus/icons-vue'
   import AppeaInfoDialog from './AppeaInfoDialog.vue'
@@ -254,7 +255,18 @@
             )
           }
         },
-
+        {
+          prop: 'payment_type',
+          label: '退款类型',
+          align: 'center',
+          width: 80,
+          formatter: (row: any) => {
+            return (
+              PAYMENT_TYPE_OPTIONS.find((item: any) => item.value === row.payment_type)?.label ||
+              '-'
+            )
+          }
+        },
         {
           prop: 'time',
           label: '创建时间',

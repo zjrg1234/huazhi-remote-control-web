@@ -139,7 +139,7 @@
     dialogFormVisible.value = true
     form.value = {
       ...params,
-      refund_cause1: params.refund_cause || '',
+      refund_cause1: params.refund_cause || '-',
       refund_amount2: '',
       platform_reply2: '',
       refund_cause2: ''

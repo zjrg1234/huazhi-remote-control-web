@@ -56,6 +56,8 @@
     <CarDetailDialog ref="carDetailDialogRef" />
 
     <OrderRefundDialog ref="orderRefundDialogRef" />
+
+    <DetailDialog ref="detailDialogRef" />
   </div>
 </template>
 
@@ -73,11 +75,13 @@
   import AppeaInfoDialog from './AppeaInfoDialog.vue'
   import CarDetailDialog from '../com/CarDetailDialog.vue'
   import OrderRefundDialog from '../com/OrderRefundDialog.vue'
+  import DetailDialog from '../com/DetailDialog.vue'
 
   defineOptions({ name: 'OrderAppealRecord' })
   const appeInfoDialogRef = ref()
   const carDetailDialogRef = ref()
   const orderRefundDialogRef = ref()
+  const detailDialogRef = ref()
   // 表单搜索初始值
   const searchFormState = ref({
     phone: '',
@@ -294,7 +298,11 @@
       carDetailDialogRef.value.openDialog(row.detail)
     }
     if (row.type === 2) {
-      appeInfoDialogRef.value.openDialog(row.detail)
+      detailDialogRef.value.openDialog({
+        ...row.detail,
+        order_time: row.detail.time,
+        payment_amount: row.detail.amount - row.detail.refund_amount
+      })
     }
   }
 

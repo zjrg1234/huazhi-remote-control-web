@@ -113,3 +113,10 @@ export function editAgentPwd(params: any) {
     params
   })
 }
+
+export function editAgentBalace(params: any) {
+  return request.post<any>({
+    url: '/backend/agent/change/balance',
+    params
+  })
+}

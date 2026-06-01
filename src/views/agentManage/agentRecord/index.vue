@@ -44,6 +44,7 @@
                     >
                       修改密码
                     </el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 8 }">修改金额</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 4 }">冻结</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 5 }">下架</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>
@@ -63,6 +64,7 @@
     <EditPwdDialog ref="editPwdDialogRef" />
     <BalanceDialog ref="balanceDialogRef" />
     <iDialog ref="iDialogRef" @refresh="handleSearch" />
+    <EditBalanceDialog ref="editBalanceDialog"></EditBalanceDialog>
   </div>
 </template>
 
@@ -79,10 +81,12 @@
   defineOptions({ name: 'AgentRecord' })
   import EditPwdDialog from '@/components/EditPwdDialog/index.vue'
   import BalanceDialog from './BalanceDialog.vue'
+  import EditBalanceDialog from './EditBalance.vue'
   import iDialog from './iDialog.vue'
   const iDialogRef = ref()
   const editPwdDialogRef = ref()
   const balanceDialogRef = ref()
+  const editBalanceDialog = ref()
   // import { useRoute } from 'vue-router'
   // const route = useRoute()
   // console.log(route.query)
@@ -354,6 +358,10 @@
         } else {
           ElMessage.error(res.msg || '操作失败')
         }
+      })
+    } else if (command.type == 8) {
+      editBalanceDialog.value.openDialog({
+        id: command.id
       })
     }
   }

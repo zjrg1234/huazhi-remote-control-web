@@ -112,16 +112,16 @@
       props: {
         placeholder: '请输入...'
       }
-    },
-    {
-      key: 'operator_name',
-      label: '后台操作人员姓名',
-      labelWidth: 130,
-      type: 'input',
-      props: {
-        placeholder: '请输入...'
-      }
     }
+    // {
+    //   key: 'operator_name',
+    //   label: '后台操作人员姓名',
+    //   labelWidth: 130,
+    //   type: 'input',
+    //   props: {
+    //     placeholder: '请输入...'
+    //   }
+    // }
   ])
 
   const handleSearch = async () => {
@@ -172,7 +172,7 @@
           align: 'center'
         },
         {
-          prop: 'username',
+          prop: 'user_name',
           label: '用户姓名',
           align: 'center'
         },
@@ -188,12 +188,12 @@
           align: 'center'
         },
         {
-          prop: 'amount',
+          prop: 'energy',
           label: '金额',
           align: 'center'
         },
         {
-          prop: 'balance',
+          prop: 'surplus_energy',
           label: '修改后余额',
           align: 'center'
         },
@@ -203,12 +203,12 @@
           width: 120,
           align: 'center'
         },
-        {
-          prop: 'operator_name',
-          label: '后台操作人员姓名',
-          align: 'center',
-          width: 180
-        },
+        // {
+        //   prop: 'operator_name',
+        //   label: '后台操作人员姓名',
+        //   align: 'center',
+        //   width: 180
+        // },
         {
           prop: 'time',
           label: '时间',

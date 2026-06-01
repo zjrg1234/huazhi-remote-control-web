@@ -6,6 +6,7 @@
       class="top-right-dialog"
       width="800"
       :append-to-body="true"
+      @close="handleReset"
     >
       <ArtSearchBar
         ref="searchBarRef"
@@ -63,8 +64,7 @@
   })
   const typeList = ref()
 
-  const openDialog = (params: any) => {
-    console.log(params)
+  const openDialog = async (params: any) => {
     searchFormState.value.id = params.id
 
     fetchAgentTypeList({
@@ -81,6 +81,8 @@
         typeList.value = arr
       }
     })
+
+    await handleSearch()
     dialogFormVisible.value = true
   }
   defineExpose({ openDialog })
@@ -113,12 +115,7 @@
   const handleSearch = async () => {
     const { daterange, ...filtersParams } = searchFormState.value
     const [start_time, end_time] = Array.isArray(daterange) ? daterange : [null, null]
-    // // 搜索参数赋值
-    // Object.assign(searchFormState.value, {
-    //   ...filtersParams,
-    //   start_time,
-    //   end_time
-    // })
+
     Object.assign(searchParams, {
       ...filtersParams,
       start_time,
@@ -128,7 +125,9 @@
     getData()
   }
 
-  const handleReset = () => {}
+  const handleReset = () => {
+    data.value = []
+  }
 
   const {
     data,

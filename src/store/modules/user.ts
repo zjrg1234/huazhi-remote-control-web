@@ -33,6 +33,8 @@ export const useUserStore = defineStore(
     // 刷新令牌
     const refreshToken = ref('')
 
+    const userName = ref('')
+
     // 计算属性：获取用户信息
     const getUserInfo = computed(() => info.value)
     // 计算属性：获取设置状态
@@ -102,6 +104,13 @@ export const useUserStore = defineStore(
     }
 
     /**
+      登录账号
+     */
+    const setUserName = (name: string) => {
+      userName.value = name
+    }
+
+    /**
      * 退出登录
      * 清空所有用户相关状态并跳转到登录页
      */
@@ -136,6 +145,7 @@ export const useUserStore = defineStore(
       isLock,
       lockPassword,
       info,
+      userName,
       searchHistory,
       accessToken,
       refreshToken,
@@ -149,6 +159,7 @@ export const useUserStore = defineStore(
       setLockStatus,
       setLockPassword,
       setToken,
+      setUserName,
       logOut
     }
   },

@@ -112,16 +112,16 @@
       props: {
         placeholder: '请输入...'
       }
-    },
-    {
-      key: 'operator_name',
-      label: '后台操作人员姓名',
-      labelWidth: 130,
-      type: 'input',
-      props: {
-        placeholder: '请输入...'
-      }
     }
+    // {
+    //   key: 'operator_name',
+    //   label: '后台操作人员姓名',
+    //   labelWidth: 130,
+    //   type: 'input',
+    //   props: {
+    //     placeholder: '请输入...'
+    //   }
+    // }
   ])
 
   const handleSearch = async () => {
@@ -204,12 +204,12 @@
           width: 120,
           align: 'center'
         },
-        {
-          prop: 'operator_name',
-          label: '后台操作人员姓名',
-          align: 'center',
-          width: 180
-        },
+        // {
+        //   prop: 'operator_name',
+        //   label: '后台操作人员姓名',
+        //   align: 'center',
+        //   width: 180
+        // },
         {
           prop: 'time',
           label: '时间',

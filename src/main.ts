@@ -22,6 +22,22 @@ document.addEventListener(
   { passive: false }
 )
 
+
+// main.js / main.ts 最顶部
+const debounce = (func:any, wait:any) => {
+  let timeout:any;
+  return (...args: any) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+};
+
+const resizeObserver = window.ResizeObserver;
+window.ResizeObserver = class ResizeObserver extends resizeObserver {
+  constructor(callback:any) {
+    super(debounce(callback, 20));
+  }
+};
 const app = createApp(App)
 initStore(app)
 initRouter(app)

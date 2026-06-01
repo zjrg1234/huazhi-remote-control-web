@@ -226,8 +226,6 @@ async function processFrontendMenu(router: Router): Promise<void> {
     throw new Error('获取用户角色失败')
   }
 
-  console.log(menuList)
-  console.log(roles)
   const filteredMenuList = filterMenuByRoles(menuList, roles)
 
   await registerAndStoreMenu(router, filteredMenuList)

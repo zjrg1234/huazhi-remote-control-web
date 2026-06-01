@@ -25,8 +25,12 @@
 
 <script setup lang="ts">
   import { editBalance } from '@/api/userManage'
+  import { useUserStore } from '@/store/modules/user'
 
   defineOptions({ name: 'EditBalanceDialog' })
+
+  const userStore = useUserStore()
+  const userInfo = computed(() => userStore.getUserInfo)
   const dialogFormVisible = ref(false)
 
   // 表单搜索初始值
@@ -43,7 +47,7 @@
       ElMessage.error('请输入增加的余额')
       return
     }
-    const res = await editBalance(form.value)
+    const res = await editBalance({ ...form.value, operator_account: userInfo.value.userName })
     if (res.code === 200) {
       ElMessage.success('修改成功')
       emit('refresh')

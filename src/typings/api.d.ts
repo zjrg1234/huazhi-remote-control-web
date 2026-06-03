@@ -315,7 +315,7 @@ declare namespace Api {
     }
 
     type SearchParams = Partial<
-      Pick<ListItem, 'phone' | 'user_name'> & Api.Common.CommonSearchParams
+      Pick<ListItem, 'phone' | 'user_name' | 'order_no'> & Api.Common.CommonSearchParams
     >
 
     type SearchBalanceParams = Partial<

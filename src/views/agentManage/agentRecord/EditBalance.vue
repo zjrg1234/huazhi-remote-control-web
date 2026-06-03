@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog v-model="dialogFormVisible" title="修改金额" width="400">
+    <el-dialog v-model="dialogFormVisible" title="修改余额" width="400">
       <el-form :model="form" label-position="right" label-width="70px">
         <el-form-item label="金额：">
           <el-input v-model="form.amount" autocomplete="off" placeholder="请输入金额" />

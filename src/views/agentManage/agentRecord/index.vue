@@ -44,7 +44,7 @@
                     >
                       修改密码
                     </el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 8 }">修改金额</el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 8 }">修改余额</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 4 }">冻结</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 5 }">下架</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>

@@ -378,7 +378,7 @@
           prop: 'operation',
           label: '操作',
           align: 'center',
-          width: 80,
+          width: 100,
           useSlot: true,
           slotName: 'operation',
           fixed: 'right'

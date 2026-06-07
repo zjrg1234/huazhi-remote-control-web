@@ -174,149 +174,157 @@
   ])
 
   const handleSearch = async () => {
-    const { ...filtersParams } = searchFormState.value
+    // const { ...filtersParams } = searchFormState.value
 
     // 搜索参数赋值
-    Object.assign(searchFormState, { ...filtersParams })
+    Object.assign(searchParams, { ...searchFormState.value })
     getData()
   }
 
   const handleReset = () => {}
 
-  const { data, columns, loading, pagination, handleSizeChange, handleCurrentChange, getData } =
-    useTable({
-      core: {
-        apiFn: fetchOrderList,
-        apiParams: {
-          page: 1,
-          size: 20
+  const {
+    data,
+    columns,
+    searchParams,
+    loading,
+    pagination,
+    handleSizeChange,
+    handleCurrentChange,
+    getData
+  } = useTable({
+    core: {
+      apiFn: fetchOrderList,
+      apiParams: {
+        page: 1,
+        size: 20
+      },
+      columnsFactory: () => [
+        {
+          prop: 'id',
+          label: '#',
+          align: 'center',
+          width: 80
         },
-        columnsFactory: () => [
-          {
-            prop: 'id',
-            label: '#',
-            align: 'center',
-            width: 80
-          },
-          {
-            prop: 'order_no',
-            label: '预约号',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'user_name',
-            label: '用户',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'phone',
-            label: '手机号',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'venue_name',
-            label: '场地',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'vehicle_name',
-            label: '车辆',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'reservation_status',
-            label: '预约状态',
-            align: 'center',
-            width: 80,
-            formatter: (row: any) => {
-              return (
-                ORDER_STATUS_OPTIONS.find((item: any) => item.value === row.reservation_status)
-                  ?.label || '-'
-              )
-            }
-          },
-          {
-            prop: 'billing_method',
-            label: '计费方式',
-            align: 'center',
-            width: 80,
-            formatter: (row: any) => {
-              return (
-                BILLING_TYPE_OPTIONS.find((item: any) => item.value === row.billing_method)
-                  ?.label || '-'
-              )
-            }
-          },
-          {
-            prop: 'billing_rules',
-            label: '计费规则',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'appeal_status',
-            label: '申诉状态',
-            align: 'center',
-            width: 80,
-            formatter: (row: any) => {
-              return (
-                APPEAL_STATUS_OPTIONS.find((item: any) => item.value === row.appeal_status)
-                  ?.label || '-'
-              )
-            }
-          },
-          {
-            prop: 'payment_type',
-            label: '支付类型',
-            align: 'center',
-            width: 120,
-            formatter: (row: any) => {
-              return (
-                PAYMENT_TYPE_OPTIONS.find((item: any) => item.value === row.payment_type)?.label ||
-                '-'
-              )
-            }
-          },
-          {
-            prop: 'payment_amount',
-            label: '支付金额',
-            align: 'center',
-            width: 120
-          },
-          {
-            prop: 'start_time',
-            label: '开始时间',
-            align: 'center',
-            width: 140
-          },
-          {
-            prop: 'end_time',
-            label: '结束时间',
-            align: 'center',
-            width: 140
-          },
-          {
-            prop: 'order_time',
-            label: '创建时间',
-            align: 'center',
-            width: 140
-          },
-          {
-            prop: 'operation',
-            label: '操作',
-            align: 'center',
-            width: 130,
-            useSlot: true,
-            fixed: 'right'
+        {
+          prop: 'order_no',
+          label: '预约号',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'user_name',
+          label: '用户',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'phone',
+          label: '手机号',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'venue_name',
+          label: '场地',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'vehicle_name',
+          label: '车辆',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'reservation_status',
+          label: '预约状态',
+          align: 'center',
+          width: 80,
+          formatter: (row: any) => {
+            return (
+              ORDER_STATUS_OPTIONS.find((item: any) => item.value === row.reservation_status)
+                ?.label || '-'
+            )
           }
-        ]
-      }
-    })
+        },
+        {
+          prop: 'billing_method',
+          label: '计费方式',
+          align: 'center',
+          width: 80,
+          formatter: (row: any) => {
+            return (
+              BILLING_TYPE_OPTIONS.find((item: any) => item.value === row.billing_method)?.label ||
+              '-'
+            )
+          }
+        },
+        {
+          prop: 'billing_rules',
+          label: '计费规则',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'appeal_status',
+          label: '申诉状态',
+          align: 'center',
+          width: 80,
+          formatter: (row: any) => {
+            return (
+              APPEAL_STATUS_OPTIONS.find((item: any) => item.value === row.appeal_status)?.label ||
+              '-'
+            )
+          }
+        },
+        {
+          prop: 'payment_type',
+          label: '支付类型',
+          align: 'center',
+          width: 120,
+          formatter: (row: any) => {
+            return (
+              PAYMENT_TYPE_OPTIONS.find((item: any) => item.value === row.payment_type)?.label ||
+              '-'
+            )
+          }
+        },
+        {
+          prop: 'payment_amount',
+          label: '支付金额',
+          align: 'center',
+          width: 120
+        },
+        {
+          prop: 'start_time',
+          label: '开始时间',
+          align: 'center',
+          width: 140
+        },
+        {
+          prop: 'end_time',
+          label: '结束时间',
+          align: 'center',
+          width: 140
+        },
+        {
+          prop: 'order_time',
+          label: '创建时间',
+          align: 'center',
+          width: 140
+        },
+        {
+          prop: 'operation',
+          label: '操作',
+          align: 'center',
+          width: 130,
+          useSlot: true,
+          fixed: 'right'
+        }
+      ]
+    }
+  })
 
   // const handleRefundRecord = (row: any) => {
   //   orderRefundDialogRef.value.openDialog(row)

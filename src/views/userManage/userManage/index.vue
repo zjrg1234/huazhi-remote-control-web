@@ -46,6 +46,9 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item :command="{ id: row.id, type: 1 }">余额记录</el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 8 }">
+                      专区余额记录
+                    </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 2 }">能量记录</el-dropdown-item>
                     <el-dropdown-item
                       :command="{ id: row.id, phone_number: row.phone_number, type: 3 }"
@@ -116,6 +119,8 @@
     <EditPwdDialog ref="editPwdDialogRef"></EditPwdDialog>
     <EditBalanceDialog ref="editBalanceDialogRef" @refresh="handleSearch"></EditBalanceDialog>
     <EditEnergyDialog ref="editEnergyDialogRef" @refresh="handleSearch"></EditEnergyDialog>
+
+    <AreaBalanceDialog ref="areaBalanceDialog"></AreaBalanceDialog>
   </div>
 </template>
 
@@ -128,12 +133,14 @@
   import BalanceDialog from './BalanceDialog.vue'
   import EditBalanceDialog from './EditBalanceDialog.vue'
   import EditEnergyDialog from './EditEnergyDialog.vue'
+  import AreaBalanceDialog from './AreaBalanceDialog.vue'
 
   const balanceDialogRef = ref()
   const energyDialogRef = ref()
   const editPwdDialogRef = ref()
   const editBalanceDialogRef = ref()
   const editEnergyDialogRef = ref()
+  const areaBalanceDialog = ref()
 
   defineOptions({ name: 'UserManage' })
   const dialogFormVisible = ref(false)
@@ -443,6 +450,10 @@
         } else {
           ElMessage.error(res.msg || '操作失败')
         }
+      })
+    } else if (command.type == 8) {
+      areaBalanceDialog.value.openDialog({
+        id: command.id
       })
     }
   }

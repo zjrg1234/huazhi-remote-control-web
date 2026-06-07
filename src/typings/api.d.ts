@@ -128,7 +128,13 @@ declare namespace Api {
     type List = Api.Common.PaginatedResponse<ListItem>
 
     type EnergyEditRecordList = Api.Common.PaginatedResponse<EnergyEditRecordListItem>
-
+    type WalletRecord = Api.Common.PaginatedResponse<WalletRecordItem>
+    interface WalletRecordItem {
+      id: number
+      uid: number
+      balance: number
+      special_area_name: string
+    }
     interface EnergyEditRecordListItem {
       id: number
       user_id: number

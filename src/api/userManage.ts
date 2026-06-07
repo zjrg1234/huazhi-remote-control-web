@@ -76,3 +76,19 @@ export function getEditEnergyRecord(params: any) {
     params
   })
 }
+
+// 用户余额列表
+export function getUserWalletRecord(params: any) {
+  return request.post<Api.UserManage.WalletRecord>({
+    url: '/backend/user/wallet/list',
+    params
+  })
+}
+
+// 修改钱包余额
+export function changeUserWalletBalance(params: any) {
+  return request.post<any>({
+    url: '/backend/user/change/wallet/balance',
+    params
+  })
+}

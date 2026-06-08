@@ -16,7 +16,9 @@
             @pagination:current-change="handleCurrentChange"
           >
             <template #operation="{ row }">
-              <el-button type="primary" @click="handleRefund(row)">撤销</el-button>
+              <el-button type="primary" v-if="row.status != 1" @click="handleRefund(row)"
+                >撤销</el-button
+              >
             </template>
           </ArtTable>
         </ElCard>
@@ -124,30 +126,35 @@
           width: 50
         },
         {
-          prop: 'type_name',
+          prop: 'amount',
           label: '退款金额',
           align: 'center'
         },
         {
-          prop: '',
+          prop: 'refund_cause',
           label: '原因',
           align: 'center'
         },
         {
-          prop: 'activity_record_id',
+          prop: 'time',
           label: '时间',
           align: 'center',
-          width: 130
+          width: 130,
+          showTooltip: true
         },
         {
-          prop: 'energy',
+          prop: 'status',
           label: '状态',
-          align: 'center'
+          align: 'center',
+          formatter: (row: any) => {
+            return row.status == 1 ? '成功' : '失败'
+          }
         },
         {
           prop: 'operation',
           label: '操作',
-          align: 'center'
+          align: 'center',
+          useSlot: true
         }
       ]
     }

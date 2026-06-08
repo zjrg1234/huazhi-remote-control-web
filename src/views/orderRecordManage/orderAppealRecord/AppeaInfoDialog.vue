@@ -26,27 +26,27 @@
       <el-form-item label="手动回复：" v-if="form.platform_reply == '其他'">
         <el-input v-model="form.platform_reply2" placeholder="请输入平台回复信息" />
       </el-form-item>
-      <div v-if="form.appeal_status == 2">
-        <el-form-item label="支付总额：">
-          <span>{{ form.amount }}</span>
-        </el-form-item>
-        <el-form-item label="可退款金额：">
-          <span>{{ form.refundable_amount }}</span>
-        </el-form-item>
-        <el-form-item label="退款金额：">
-          <el-input v-model="form.refund_amount2" placeholder="请输入退款金额" />
-        </el-form-item>
-        <el-form-item label="退款原因：">
-          <el-radio-group v-model="form.refund_cause" @change="handleTuikuanOptionsReaChange">
-            <el-radio v-for="item in tuikuanOptionsRea" :label="item.label" :key="item.value">
-              {{ item.label }}
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="手动回复：" v-if="form.refund_cause == '其他'">
-          <el-input v-model="form.refund_cause2" placeholder="请输入退款原因" />
-        </el-form-item>
-      </div>
+      <!-- <div v-if="form.appeal_status == 2"> -->
+      <el-form-item label="支付总额：">
+        <span>{{ form.amount }}</span>
+      </el-form-item>
+      <el-form-item label="可退款金额：">
+        <span>{{ form.refundable_amount }}</span>
+      </el-form-item>
+      <el-form-item label="退款金额：">
+        <el-input v-model="form.refund_amount2" placeholder="请输入退款金额" />
+      </el-form-item>
+      <el-form-item label="退款原因：">
+        <el-radio-group v-model="form.refund_cause" @change="handleTuikuanOptionsReaChange">
+          <el-radio v-for="item in tuikuanOptionsRea" :label="item.label" :key="item.value">
+            {{ item.label }}
+          </el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="手动回复：" v-if="form.refund_cause == '其他'">
+        <el-input v-model="form.refund_cause2" placeholder="请输入退款原因" />
+      </el-form-item>
+      <!-- </div> -->
     </el-form>
     <template #footer>
       <div class="dialog-footer">

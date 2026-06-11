@@ -37,8 +37,13 @@
         <el-input v-model="form.refund_amount2" placeholder="请输入退款金额" />
       </el-form-item>
       <el-form-item label="退款原因：">
-        <el-radio-group v-model="form.refund_cause" @change="handleTuikuanOptionsReaChange">
-          <el-radio v-for="item in tuikuanOptionsRea" :label="item.label" :key="item.value">
+        <el-radio-group v-model="form.refund_cause">
+          <el-radio
+            v-for="item in tuikuanOptionsRea"
+            @click.prevent="handleToggleRefundCause(item.label)"
+            :label="item.label"
+            :key="item.value"
+          >
             {{ item.label }}
           </el-radio>
         </el-radio-group>
@@ -144,6 +149,12 @@
       platform_reply2: '',
       refund_cause2: ''
     }
+    // 待处理的话 给已处理
+    if (params.appeal_status == 1) {
+      form.value.appeal_status = 2
+
+      form.value.platform_reply = '已退款稍后到'
+    }
   }
   defineExpose({ openDialog })
 
@@ -154,7 +165,14 @@
   const handlePlatformReplyChange = (val: any) => {
     console.log(val)
   }
-  const handleTuikuanOptionsReaChange = (val: any) => {
-    console.log(val)
+
+  const handleToggleRefundCause = (val: any) => {
+    if (form.value.refund_cause === val) {
+      // 如果点击的是当前已选中的项，则取消选中（置为空字符串）
+      form.value.refund_cause = ''
+    } else {
+      // 否则正常选中该项
+      form.value.refund_cause = val
+    }
   }
 </script>

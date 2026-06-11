@@ -101,23 +101,19 @@
   })
 
   const handleSubmit = async () => {
+    if (!form.value.payment_type) {
+      ElMessage.error('请选择退款选项')
+      return
+    }
     if (form.value.refund_type == 1) {
-      if (!form.value.refund_amount2) {
-        ElMessage.error('请输入退款金额')
-        return
-      }
-      if (!form.value.refund_cause) {
-        ElMessage.error('请选择退款原因')
-        return
-      }
       if (form.value.refund_cause == '其他' && !form.value.refund_cause2) {
         ElMessage.error('请输入退款原因')
         return
       }
-    }
-    if (!form.value.payment_type) {
-      ElMessage.error('请选择退款选项')
-      return
+      if (form.value.refund_cause != '' && !form.value.refund_amount2) {
+        ElMessage.error('请输入退款金额')
+        return
+      }
     }
 
     handleOrderAppeal({
@@ -125,8 +121,8 @@
       type: form.value.payment_type,
       refund_type: form.value.refund_type,
       appeal_status: form.value.appeal_status,
-      refund_amount: form.value.refund_amount2,
-      refund_cause: form.value.refund_cause || form.value.refund_cause2,
+      refund_amount: form.value.refund_amount2 || '',
+      refund_cause: form.value.refund_cause || form.value.refund_cause2 || '',
       platform_reply: form.value.platform_reply || form.value.platform_reply2
     }).then((res) => {
       if (res.code == 200) {

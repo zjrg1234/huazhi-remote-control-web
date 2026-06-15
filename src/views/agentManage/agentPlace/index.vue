@@ -18,7 +18,6 @@
         <!-- 表格 -->
         <ArtTable
           rowKey="id"
-          :show-table-header="false"
           :loading="loading"
           :data="data"
           :columns="columns"

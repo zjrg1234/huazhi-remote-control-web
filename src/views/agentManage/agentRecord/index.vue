@@ -20,8 +20,6 @@
         <!-- 表格 -->
         <ArtTable
           rowKey="id"
-          :class="'ss'"
-          :show-table-header="false"
           :loading="loading"
           :data="data"
           :columns="columns"
@@ -368,11 +366,22 @@
 </script>
 
 <style lang="scss" scoped>
-  :deep(.cell) {
-    padding: 0;
+  .page.art-full-height {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; // 确保不会撑破外层容器
   }
 
-  .content {
-    padding-right: 100px;
+  .art-table-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+
+    // 确保 Element Plus 的表格能够自适应剩余高度
+    :deep(.el-table) {
+      flex: 1;
+      width: 100%;
+    }
   }
 </style>

@@ -177,7 +177,7 @@
           align: 'center'
         },
         {
-          prop: 'phone_number',
+          prop: 'phone',
           label: '手机号',
           width: 110,
           align: 'center'

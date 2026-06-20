@@ -60,6 +60,7 @@
           <el-upload
             class="avatar-uploader"
             :action="uploadImageUrl"
+            ref="uploader"
             :show-file-list="false"
             :limit="1"
             :headers="uploadHeaders"
@@ -157,6 +158,7 @@
     venue_quantity: '',
     type: ''
   })
+  const uploader = ref()
   const rules = computed<FormRules>(() => {
     // 头像的自定义校验函数
     const validateHeadShot = (rule: any, value: any, callback: any) => {
@@ -326,6 +328,7 @@
     if (response.code == 200) {
       formData.value.head_shot = response.data.file[0]
     }
+    uploader.value.clearFiles()
   }
 
   const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {

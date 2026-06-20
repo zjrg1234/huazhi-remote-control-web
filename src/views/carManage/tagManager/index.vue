@@ -72,7 +72,7 @@
   import { fetchList } from '@/api/userManage'
   import type { FormInstance, FormRules } from 'element-plus'
 
-  defineOptions({ name: 'AgentRecord' })
+  defineOptions({ name: 'TagManager' })
 
   import { useRoute } from 'vue-router'
   const dialogFormVisible = ref(false)

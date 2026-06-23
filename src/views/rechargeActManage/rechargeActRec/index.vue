@@ -43,6 +43,8 @@
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
   import { getRechargeActRecord } from '@/api/rechargeActManage'
+  import { fetchSpecialAreaList } from '@/api/common'
+
   import iDialog from './iDialog.vue'
 
   defineOptions({ name: 'RechargeActRec' })
@@ -54,11 +56,22 @@
     daterange: ['', '']
   })
   const dialogRef = ref()
-
+  const specialAreaList = ref([])
+  onBeforeMount(() => {
+    fetchSpecialAreaList({
+      page: 1,
+      size: 9999
+    }).then((res) => {
+      specialAreaList.value = res.data.map((item: { agent_name: any; id: any }) => ({
+        label: item.agent_name,
+        value: item.id
+      }))
+    })
+  })
   // 搜索表单配置
   const searchItems = computed(() => [
     {
-      key: 'name',
+      key: 'user_name',
       label: '用户名称',
       labelWidth: '100px',
 
@@ -68,7 +81,7 @@
       }
     },
     {
-      key: 'phone',
+      key: 'phone_number',
       label: '用户电话',
       labelWidth: '100px',
 
@@ -78,18 +91,18 @@
       }
     },
     {
-      key: 'area',
+      key: 'special_area',
       label: '专区',
       type: 'select',
       labelWidth: '100px',
 
       props: {
         placeholder: '请选择',
-        options: []
+        options: specialAreaList.value
       }
     },
     {
-      key: 'actRec',
+      key: 'activity_id',
       label: '活动记录ID',
       labelWidth: '100px',
       type: 'input',
@@ -98,7 +111,7 @@
       }
     },
     {
-      key: 'rechargeActId',
+      key: 'id',
       label: '充值活动ID',
       labelWidth: '100px',
 
@@ -108,7 +121,7 @@
       }
     },
     {
-      key: 'rechargeActId',
+      key: 'pay_id',
       label: '支付记录ID',
       labelWidth: '100px',
 
@@ -118,7 +131,7 @@
       }
     },
     {
-      key: 'energyRecId',
+      key: 'energy_id',
       label: '能量记录ID',
       labelWidth: '100px',
 
@@ -144,10 +157,10 @@
 
   const handleSearch = async () => {
     const { daterange, ...filtersParams } = searchFormState.value
-    const [startTime, endTime] = Array.isArray(daterange) ? daterange : [null, null]
+    const [start_time, end_time] = Array.isArray(daterange) ? daterange : [null, null]
 
     // 搜索参数赋值
-    Object.assign(searchParams, { ...filtersParams, startTime, endTime })
+    Object.assign(searchParams, { ...filtersParams, start_time, end_time })
     getData()
   }
 

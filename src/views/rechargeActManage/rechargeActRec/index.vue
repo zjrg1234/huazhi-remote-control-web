@@ -110,16 +110,16 @@
         placeholder: '请输入活动记录ID'
       }
     },
-    {
-      key: 'id',
-      label: '充值活动ID',
-      labelWidth: '100px',
+    // {
+    //   key: 'id',
+    //   label: '充值活动ID',
+    //   labelWidth: '100px',
 
-      type: 'input',
-      props: {
-        placeholder: '请输入充值活动ID'
-      }
-    },
+    //   type: 'input',
+    //   props: {
+    //     placeholder: '请输入充值活动ID'
+    //   }
+    // },
     {
       key: 'pay_id',
       label: '支付记录ID',
@@ -224,11 +224,11 @@
           label: '创建时间',
           showTooltip: true
         },
-        {
-          prop: 'id',
-          label: '充值活动ID',
-          align: 'center'
-        },
+        // {
+        //   prop: 'id',
+        //   label: '充值活动ID',
+        //   align: 'center'
+        // },
         {
           prop: 'pay_id',
           label: '支付记录ID',

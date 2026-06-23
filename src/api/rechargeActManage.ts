@@ -42,7 +42,7 @@ export function delRechargeAct(params: any) {
 
 export function getRechargeActRecord(params: any) {
   return request.post<any>({
-    url: '/backend/rechargeAct/record',
+    url: '/backend/deposit/activity/record',
     data: params
   })
 }

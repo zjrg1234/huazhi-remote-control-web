@@ -29,18 +29,21 @@
         >
           <template #operation="{ row }">
             <div class="operation-buttons">
-              <ArtButtonTable type="view" @click="operDetail" :row="row">详情</ArtButtonTable>
+              <el-link type="primary" @click="handleDetail(row)">详情</el-link>
             </div>
           </template>
         </ArtTable>
       </ElCard>
     </div>
+
+    <iDialog ref="dialogRef"></iDialog>
   </div>
 </template>
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchRechargeActList } from '@/api/rechargeActManage'
+  import { getRechargeActRecord } from '@/api/rechargeActManage'
+  import iDialog from './iDialog.vue'
 
   defineOptions({ name: 'RechargeActRec' })
 
@@ -50,6 +53,7 @@
     area: '',
     daterange: ['', '']
   })
+  const dialogRef = ref()
 
   // 搜索表单配置
   const searchItems = computed(() => [
@@ -150,7 +154,9 @@
   const handleReset = () => {
     resetSearchParams()
   }
-  const operDetail = () => {}
+  const handleDetail = (row: any) => {
+    dialogRef.value.openDialog(row)
+  }
 
   const {
     data,
@@ -164,64 +170,59 @@
     getData
   } = useTable({
     core: {
-      apiFn: fetchRechargeActList,
+      apiFn: getRechargeActRecord,
       apiParams: {
         page: 1,
         size: 20
       },
       columnsFactory: () => [
         {
-          prop: 'id',
-          label: '#'
-        },
-        {
-          prop: 'name',
+          prop: 'activity_id',
           label: '活动记录ID',
-          width: 200,
           align: 'center'
         },
         {
-          prop: 'area',
+          prop: 'special_area_name',
           label: '专区'
         },
         {
-          prop: 'userName',
+          prop: 'user_name',
           label: '用户名称'
         },
         {
-          prop: 'phone',
-          label: '用户电话'
+          prop: 'phone_number',
+          label: '用户电话',
+          width: 100
         },
         {
-          prop: 'rechargeAmount',
+          prop: 'amount',
           label: '充值金额'
         },
         {
-          prop: 'giveEnergyAmount',
+          prop: 'send_money',
           label: '赠送能量'
         },
         {
-          prop: 'limitTimes',
+          prop: 'num',
           label: '限制次数'
         },
         {
-          prop: 'createTime',
-          label: '创建时间'
+          prop: 'time',
+          label: '创建时间',
+          showTooltip: true
         },
         {
-          prop: 'rechargeActId',
+          prop: 'id',
           label: '充值活动ID',
-          width: 190,
           align: 'center'
         },
         {
-          prop: 'payRecordId',
+          prop: 'pay_id',
           label: '支付记录ID',
-          width: 100,
           align: 'center'
         },
         {
-          prop: 'energyRecId',
+          prop: 'energy_id',
           label: '能量记录ID',
           width: 180,
           align: 'center'
@@ -238,4 +239,8 @@
   })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  :deep(.cell) {
+    text-align: center;
+  }
+</style>

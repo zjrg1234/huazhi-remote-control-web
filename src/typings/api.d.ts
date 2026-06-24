@@ -494,4 +494,12 @@ declare namespace Api {
     }
     type SearchParams = Partial<Pick<ListItem, 'type'> & Api.Common.CommonSearchParams>
   }
+  namespace RechargeRecord {
+    type List = Api.Common.PaginatedResponse<ListItem>
+    interface ListItem {
+      id: number
+      activity_id: string
+    }
+    type SearchParams = Partial<Pick<ListItem, 'type'> & Api.Common.CommonSearchParams>
+  }
 }

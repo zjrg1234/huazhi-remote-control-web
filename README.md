@@ -103,4 +103,12 @@ If you feel this project has reduced your development costs and solved problems 
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Daymychen/art-design-pro&type=Date)](https://www.star-history.com/#Daymychen/art-design-pro&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Daymychen/art-design-pro&type=Date)](https://www.star-history.com/#Daymychen/art-design-pro&Date) https://admin.zksjyk.cn/#/auth/login
+
+admin-zzsj-aaxijqe111 AUNL9T0KhpdwSjIf\*qwas
+
+华制后台http://manage.huazyk.cn/dashboard/analysis 账号华制admin8877555rrpppjn5密码8877555rrpppjn511p21
+
+1、到目录：cd /www/wwwroot/www-admin/huazhi-remote-control-web/ 2、git pull 如果报错 执行一下 git reset --hard HEAD 再git pull 3、pnpm build 4、全部完成去到网站、找到nginx
+
+外网ipv4面板地址: https://47.102.215.161:8888/9d08dc2d 内网面板地址:     https://172.29.213.229:8888/9d08dc2d username: user password: baotaal02AA2

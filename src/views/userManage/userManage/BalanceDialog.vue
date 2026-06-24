@@ -42,7 +42,7 @@
     </el-dialog>
 
     <el-dialog v-model="detailDialogVisible" title="预约详情" width="600" :append-to-body="true">
-      <el-tabs v-model="activeTab">
+      <el-tabs v-model="activeTab" @tab-click="handleTabClick">
         <el-tab-pane label="基本信息" name="base">
           <!-- 基本信息表单 -->
         </el-tab-pane>
@@ -332,12 +332,14 @@
           prop: 'orderNo',
           label: '预约号',
           align: 'center',
-          useSlot: true
+          useSlot: true,
+          minWidth: 120
         },
         {
           prop: 'venue',
           label: '代理商场地',
-          align: 'center'
+          align: 'center',
+          showTooltip: true
         },
         {
           prop: 'activity_record_id',
@@ -360,8 +362,10 @@
     }
   })
 
+  const orderNo = ref()
   const handleClick = (row: any) => {
     detailDialogVisible.value = true
+    orderNo.value = row.make_order_no
     fetchOrderList({
       order_no: row.make_order_no
     })
@@ -389,29 +393,33 @@
         }
       })
       .catch()
-
-    fetchOrderAppealList({
-      order_no: row.make_order_no
-    })
-      .then((res) => {
-        console.log(res)
-        if (res.code == 200 && res.data.content.length != 0) {
-          formData1.value = { ...res.data?.content[0] }
-        }
-      })
-      .catch()
-
-    getRefundRecord({
-      order_no: row.make_order_no
-    })
-      .then((res) => {
-        tableData.value = res.data?.content || []
-      })
-      .catch()
   }
 
   const handleCloseDialog = () => {
     detailDialogVisible.value = false
     activeTab.value = 'base'
+  }
+
+  const handleTabClick = (val: any) => {
+    if (val.index == 1) {
+      fetchOrderAppealList({
+        order_no: orderNo.value
+      })
+        .then((res) => {
+          if (res.code == 200 && res.data.content.length != 0) {
+            formData1.value = { ...res.data?.content[0] }
+          }
+        })
+        .catch()
+    }
+    if (val.index == 2) {
+      getRefundRecord({
+        order_no: orderNo.value
+      })
+        .then((res) => {
+          tableData.value = res.data?.content || []
+        })
+        .catch()
+    }
   }
 </script>

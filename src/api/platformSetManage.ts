@@ -197,3 +197,30 @@ export function getCarImageType() {
     url: '/backend/vehicle/image/type/list'
   })
 }
+
+export function getNoticeList() {
+  return request.post<Api.platformSetManage.NoticeListItem>({
+    url: '/backend/notice/list'
+  })
+}
+
+export function addNotice(params: any) {
+  return request.post<any>({
+    url: '/backend/notice/create',
+    params
+  })
+}
+
+export function delNotice(params: any) {
+  return request.post<any>({
+    url: '/backend/notice/delete',
+    params
+  })
+}
+
+export function updateNotice(params: any) {
+  return request.post<any>({
+    url: '/backend/notice/update',
+    params
+  })
+}

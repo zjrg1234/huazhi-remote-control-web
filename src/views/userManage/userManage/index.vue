@@ -37,6 +37,17 @@
               />
             </div>
           </template>
+          <template #screenshot="{ row }">
+            <div class="">
+              <!-- {{ row.is_cancel }} -->
+              <el-switch
+                v-model="row.is_screenshot"
+                :active-value="1"
+                :inactive-value="0"
+                @change="handleChange(row, $event)"
+              />
+            </div>
+          </template>
           <template #operation="{ row }">
             <div class="operation-buttons">
               <el-link type="primary" @click="handleShowDetail(row)">详情</el-link>
@@ -126,7 +137,7 @@
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchList, userFreeze, userdelete } from '@/api/userManage'
+  import { fetchList, userFreeze, userdelete, screenshot } from '@/api/userManage'
   import { fetchSpecialAreaList } from '@/api/common'
   import EditPwdDialog from '@/components/EditPwdDialog/index.vue'
   import EnergyDialog from './EnergyDialog.vue'
@@ -378,8 +389,14 @@
         {
           prop: 'register_time',
           label: '注册时间',
-          align: 'center',
-          width: 180
+          width: 120,
+          showToolTip: true
+        },
+        {
+          prop: 'screenshot',
+          label: '截图权限',
+          width: 120,
+          useSlot: true
         },
         {
           prop: 'operation',
@@ -456,6 +473,24 @@
         id: command.id
       })
     }
+  }
+
+  const handleChange = (row: any, val: any) => {
+    if (!row.id) return
+    screenshot({
+      id: row.id,
+      is_screenshot: Number(val)
+    })
+      .then((res) => {
+        console.log(res)
+        if (res.code == 200) {
+          let msg = val == false ? '关闭成功' : '开启成功'
+          ElMessage.success(msg)
+        } else {
+          ElMessage.success(res.msg)
+        }
+      })
+      .catch()
   }
 </script>
 

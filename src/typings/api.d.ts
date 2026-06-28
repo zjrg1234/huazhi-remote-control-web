@@ -341,6 +341,13 @@ declare namespace Api {
     type carImageList = Api.Common.PaginatedResponse<CarImageListItem>
     /** 平台参数列表 */
     type PlatformParamList = Api.Common.PaginatedResponse<PlatformParamListItem>
+
+    interface NoticeListItem {
+      id: number
+      status: number
+      content: string
+    }
+
     /** 平台参数列表项 */
     interface PlatformParamListItem {
       id: number

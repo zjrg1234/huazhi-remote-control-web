@@ -92,3 +92,10 @@ export function changeUserWalletBalance(params: any) {
     params
   })
 }
+
+export function screenshot(params: any) {
+  return request.post<any>({
+    url: '/backend/user/update/screenshot',
+    params
+  })
+}

@@ -487,7 +487,7 @@ export const useWorktabStore = defineStore(
       key: 'worktab',
       storage: localStorage,
       // 只持久化 current 和 opened 状态，避免 keepAliveExclude 无限增长
-      paths: ['current', 'opened']
+      pick: ['current', 'opened']
     }
   }
 )

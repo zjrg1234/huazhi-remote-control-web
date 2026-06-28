@@ -16,13 +16,21 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <ArtWangEditor
+          <!-- <ArtWangEditor
             ref="simpleEditorRef"
             v-model="formData.content"
             height="400px"
             placeholder="请输入内容，体验简化的编辑功能..."
             :toolbar-keys="simpleToolbarKeys"
-          />
+          /> -->
+
+          <el-input
+            v-model="formData.content"
+            placeholder="请输入内容"
+            type="textarea"
+            :rows="5"
+            :column="6"
+          ></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -38,26 +46,6 @@
 <script setup lang="ts">
   import { ElButton, ElRadioGroup } from 'element-plus'
   import { addNotice, updateNotice } from '@/api/platformSetManage'
-
-  const simpleEditorRef = ref()
-  /**
-   * 简化工具栏配置
-   * 只包含基础的编辑功能
-   */
-  const simpleToolbarKeys = [
-    'bold',
-    'italic',
-    'underline',
-    '|',
-    'bulletedList',
-    'numberedList',
-    '|',
-    'insertLink',
-    'insertImage',
-    '|',
-    'undo',
-    'redo'
-  ]
 
   defineOptions({ name: 'NoticeiDialog' })
 
@@ -86,10 +74,10 @@
     if (row.flag != -1) {
       formData.value = { ...row }
     }
-    const timer = setTimeout(() => {
-      simpleEditorRef.value.setHtml(formData.value.content)
-      clearInterval(timer)
-    }, 1000)
+    // const timer = setTimeout(() => {
+    //   simpleEditorRef.value.setHtml(formData.value.content)
+    //   clearInterval(timer)
+    // }, 1000)
   }
   const resetForm = () => {
     dialogVisible.value = false

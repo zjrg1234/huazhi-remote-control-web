@@ -43,7 +43,9 @@
                       修改密码
                     </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 8 }">修改余额</el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 4 }">冻结</el-dropdown-item>
+                    <el-dropdown-item :command="{ detail: row, type: 4 }">{{
+                      row.is_frozen == 1 ? '解冻' : '冻结'
+                    }}</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 5 }">下架</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">
@@ -314,10 +316,15 @@
       editPwdDialogRef.value.openDialog({ ...command, type: 1 })
     } else if (command.type == 4) {
       agentFreeze({
-        id: command.id
+        id: command.detail.id,
+        frozen: command.detail.is_frozen == 1 ? 0 : 1
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('冻结成功')
+          if (command.detail.is_frozen == 1) {
+            ElMessage.success('解冻成功')
+          } else {
+            ElMessage.success('冻结成功')
+          }
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')

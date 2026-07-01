@@ -72,7 +72,7 @@
                     <el-dropdown-item :command="{ id: row.id, energy: row.energy, type: 5 }"
                       >修改能量</el-dropdown-item
                     >
-                    <el-dropdown-item :command="{ id: row.id, type: 6 }">
+                    <el-dropdown-item :command="{ id: row.id, type: 6, is_frozen: row.is_frozen }">
                       {{ row.is_frozen == 0 ? '冻结' : '解冻' }}
                     </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">删除</el-dropdown-item>

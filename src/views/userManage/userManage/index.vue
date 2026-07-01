@@ -72,8 +72,8 @@
                     <el-dropdown-item :command="{ id: row.id, energy: row.energy, type: 5 }"
                       >修改能量</el-dropdown-item
                     >
-                    <el-dropdown-item v-if="row.is_frozen == 0" :command="{ id: row.id, type: 6 }">
-                      冻结
+                    <el-dropdown-item :command="{ id: row.id, type: 6 }">
+                      {{ row.is_frozen == 0 ? '冻结' : '解冻' }}
                     </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">删除</el-dropdown-item>
                   </el-dropdown-menu>
@@ -448,10 +448,14 @@
     } else if (command.type == 6) {
       userFreeze({
         id: command.id,
-        is_frozen: command.is_frozen
+        frozen: command.is_frozen == 1 ? 0 : 1
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('冻结成功')
+          let msg = '冻结成功'
+          if (command.is_frozen == 1) {
+            msg = '解冻成功'
+          }
+          ElMessage.success(msg)
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')

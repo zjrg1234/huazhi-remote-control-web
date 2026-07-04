@@ -21,7 +21,9 @@
             @pagination:current-change="handleCurrentChange"
           >
             <template #operation="{ row }">
-              <el-link type="primary" @click="handleClick(row)"> 编辑 </el-link>
+              <el-link type="primary" @click="handleClick(row, 0)"> 编辑 </el-link>
+              <span class="line">｜</span>
+              <el-link type="primary" @click="handleClick(row, 1)"> 明细 </el-link>
             </template>
           </ArtTable>
         </ElCard>
@@ -42,6 +44,8 @@
         </div>
       </template>
     </el-dialog>
+
+    <ListItem ref="listDialog"></ListItem>
   </div>
 </template>
 
@@ -49,11 +53,15 @@
   import { useTable } from '@/composables/useTable'
   import { getUserWalletRecord, changeUserWalletBalance } from '@/api/userManage'
   import { useUserStore } from '@/store/modules/user'
+  import ListItem from './AreaBalanceListDialog.vue'
+
   const userStore = useUserStore()
   const userInfo = computed(() => userStore.getUserInfo)
 
   defineOptions({ name: 'AreaBalanceDialog' })
   const dialogFormVisible = ref(false)
+  const listDialog = ref()
+
   // 表单搜索初始值
   const searchFormState = ref({
     id: ''
@@ -126,7 +134,11 @@
     }
   })
 
-  const handleClick = (row: any) => {
+  const handleClick = (row: any, flag: any) => {
+    if (flag == 1) {
+      listDialog.value.openDialog({ id: row.id })
+      return
+    }
     // 共用一个id
     id.value = row.id
     editDialogVisible.value = true

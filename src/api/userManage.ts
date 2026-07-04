@@ -99,3 +99,10 @@ export function screenshot(params: any) {
     params
   })
 }
+
+export function GetWalletDetail(params: any) {
+  return request.post<Api.UserManage.BalanceList>({
+    url: '/backend/user/wallet/detail',
+    params
+  })
+}

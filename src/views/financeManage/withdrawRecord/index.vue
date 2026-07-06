@@ -27,12 +27,9 @@
           @pagination:current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-            <el-link type="primary" v-if="row.audit_time" size="small" @click="view(row)">
-              详情
-            </el-link>
-            <el-link type="primary" v-if="!row.audit_time" size="small" @click="handleAudit(row)">
-              审核
-            </el-link>
+            <el-link type="primary" size="small" @click="view(row)"> 详情 </el-link>
+            <span class="line">｜</span>
+            <el-link type="primary" size="small" @click="handleAudit(row)"> 审核 </el-link>
           </template>
         </ArtTable>
       </ElCard>

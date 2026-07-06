@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogFormVisible" title="详情" width="700">
+  <el-dialog v-model="dialogFormVisible" :title="flag == 0 ? '详情' : '编辑'" width="700">
     <el-form :model="form" label-position="right" label-width="120px">
       <el-form-item label="提现用户：">
         <el-input v-model="form.agent_name" disabled autocomplete="off" />

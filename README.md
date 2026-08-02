@@ -107,7 +107,11 @@ If you feel this project has reduced your development costs and solved problems 
 
 admin-zzsj-aaxijqe111 AUNL9T0KhpdwSjIf\*qwas
 
-华制后台http://manage.huazyk.cn/dashboard/analysis 账号华制admin8877555rrpppjn5密码8877555rrpppjn511p21
+华制后台
+
+http://manage.huazyk.cn/dashboard/analysis 
+
+账号华制admin8877555rrpppjn5密码8877555rrpppjn511p21
 
 1、到目录：cd /www/wwwroot/www-admin/huazhi-remote-control-web/ 2、git pull 如果报错 执行一下 git reset --hard HEAD 再git pull 3、pnpm build 4、全部完成去到网站、找到nginx
 

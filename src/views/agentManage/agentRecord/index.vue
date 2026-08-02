@@ -46,9 +46,9 @@
                     <el-dropdown-item :command="{ detail: row, type: 4 }">{{
                       row.is_frozen == 1 ? '解冻' : '冻结'
                     }}</el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 5, kind: row.type }">{{
-                      row.type == 1 ? '下架' : '上架'
-                    }}</el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 5, kind: row.support_status }">
+                      {{ row.support_status == 1 ? '下架' : '上架' }}
+                    </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">
                       更新昨日营业额
@@ -334,13 +334,13 @@
       })
     } else if (command.type == 5) {
       // type 传1上架 2下架
-      let msg = '下架成功'
-      if (command.kind == 2) {
-        msg = '上架成功'
+      let msg = '上架成功'
+      if (command.kind == 1) {
+        msg = '下架成功'
       }
       agentTakeDown({
         id: command.id,
-        type: command.kind == 2 ? 1 : 2
+        type: command.kind == 1 ? 2 : 1
       }).then((res) => {
         if (res.code === 200) {
           ElMessage.success(msg)

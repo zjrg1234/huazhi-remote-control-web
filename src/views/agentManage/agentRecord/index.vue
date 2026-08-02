@@ -46,7 +46,9 @@
                     <el-dropdown-item :command="{ detail: row, type: 4 }">{{
                       row.is_frozen == 1 ? '解冻' : '冻结'
                     }}</el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 5 }">下架</el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 5, kind: row.type }">{{
+                      row.type == 1 ? '下架' : '上架'
+                    }}</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">
                       更新昨日营业额
@@ -248,7 +250,7 @@
           label: '营业状态',
           align: 'center',
           formatter: (row) => {
-            return row.support_status === 1 ? '营业中' : '未营业'
+            return row.support_status == 1 ? '已营业' : '营业'
           }
         },
         {
@@ -331,12 +333,17 @@
         }
       })
     } else if (command.type == 5) {
+      // type 传1上架 2下架
+      let msg = '下架成功'
+      if (command.kind == 2) {
+        msg = '上架成功'
+      }
       agentTakeDown({
         id: command.id,
-        is_take_down: command.is_take_down
+        type: command.kind == 2 ? 1 : 2
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('下架成功')
+          ElMessage.success(msg)
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')

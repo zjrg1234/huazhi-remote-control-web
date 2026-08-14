@@ -345,7 +345,8 @@
       "loginDialog": "登录弹窗",
       "platParam": "平台参数",
       "ipSet": "ip设置",
-      "carDefaultImage": "车辆默认图片"
+      "carDefaultImage": "车辆默认图片",
+      "noticeDialog": "公告管理"
     },
     "activityNoticeManage": {
       "title": "活动公告",

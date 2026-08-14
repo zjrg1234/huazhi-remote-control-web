@@ -10,6 +10,15 @@ export const platformSetManageRoutes: AppRouteRecord = {
   },
   children: [
     {
+      path: 'noticeDialog',
+      name: 'NoticeDialog',
+      component: '/platformSetManage/noticeDialog',
+      meta: {
+        title: 'menus.platformSetManage.noticeDialog',
+        keepAlive: false
+      }
+    },
+    {
       path: 'commonQuestion',
       name: 'CommonQuestion',
       component: '/platformSetManage/commonQuestion',

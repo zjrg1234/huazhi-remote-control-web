@@ -92,3 +92,17 @@ export function changeUserWalletBalance(params: any) {
     params
   })
 }
+
+export function screenshot(params: any) {
+  return request.post<any>({
+    url: '/backend/user/update/screenshot',
+    params
+  })
+}
+
+export function GetWalletDetail(params: any) {
+  return request.post<Api.UserManage.BalanceList>({
+    url: '/backend/user/wallet/detail',
+    params
+  })
+}

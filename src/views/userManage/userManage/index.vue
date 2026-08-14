@@ -13,7 +13,7 @@
       @reset="handleReset"
     />
 
-    <div class="page art-full-height">
+    <div class="page">
       <ElCard class="art-table-card" shadow="never" style="margin-top: 0">
         <!-- 表格 -->
         <ArtTable
@@ -34,6 +34,17 @@
                 width="30"
                 height="30"
                 @click="handlePreview(row.head_shot)"
+              />
+            </div>
+          </template>
+          <template #screenshot="{ row }">
+            <div class="">
+              <!-- {{ row.is_cancel }} -->
+              <el-switch
+                v-model="row.is_screenshot"
+                :active-value="1"
+                :inactive-value="0"
+                @change="handleChange(row, $event)"
               />
             </div>
           </template>
@@ -61,8 +72,8 @@
                     <el-dropdown-item :command="{ id: row.id, energy: row.energy, type: 5 }"
                       >修改能量</el-dropdown-item
                     >
-                    <el-dropdown-item v-if="row.is_frozen == 0" :command="{ id: row.id, type: 6 }">
-                      冻结
+                    <el-dropdown-item :command="{ id: row.id, type: 6, is_frozen: row.is_frozen }">
+                      {{ row.is_frozen == 0 ? '冻结' : '解冻' }}
                     </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">删除</el-dropdown-item>
                   </el-dropdown-menu>
@@ -126,7 +137,7 @@
 
 <script setup lang="ts">
   import { useTable } from '@/composables/useTable'
-  import { fetchList, userFreeze, userdelete } from '@/api/userManage'
+  import { fetchList, userFreeze, userdelete, screenshot } from '@/api/userManage'
   import { fetchSpecialAreaList } from '@/api/common'
   import EditPwdDialog from '@/components/EditPwdDialog/index.vue'
   import EnergyDialog from './EnergyDialog.vue'
@@ -378,8 +389,14 @@
         {
           prop: 'register_time',
           label: '注册时间',
-          align: 'center',
-          width: 180
+          width: 120,
+          showToolTip: true
+        },
+        {
+          prop: 'screenshot',
+          label: '截图权限',
+          width: 120,
+          useSlot: true
         },
         {
           prop: 'operation',
@@ -431,10 +448,14 @@
     } else if (command.type == 6) {
       userFreeze({
         id: command.id,
-        is_frozen: command.is_frozen
+        frozen: command.is_frozen == 1 ? 0 : 1
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('冻结成功')
+          let msg = '冻结成功'
+          if (command.is_frozen == 1) {
+            msg = '解冻成功'
+          }
+          ElMessage.success(msg)
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')
@@ -456,6 +477,24 @@
         id: command.id
       })
     }
+  }
+
+  const handleChange = (row: any, val: any) => {
+    if (!row.id) return
+    screenshot({
+      id: row.id,
+      is_screenshot: Number(val)
+    })
+      .then((res) => {
+        console.log(res)
+        if (res.code == 200) {
+          let msg = val == false ? '关闭成功' : '开启成功'
+          ElMessage.success(msg)
+        } else {
+          ElMessage.success(res.msg)
+        }
+      })
+      .catch()
   }
 </script>
 

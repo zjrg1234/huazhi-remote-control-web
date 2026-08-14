@@ -43,8 +43,12 @@
                       修改密码
                     </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 8 }">修改余额</el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 4 }">冻结</el-dropdown-item>
-                    <el-dropdown-item :command="{ id: row.id, type: 5 }">下架</el-dropdown-item>
+                    <el-dropdown-item :command="{ detail: row, type: 4 }">{{
+                      row.is_frozen == 1 ? '解冻' : '冻结'
+                    }}</el-dropdown-item>
+                    <el-dropdown-item :command="{ id: row.id, type: 5, kind: row.support_status }">
+                      {{ row.support_status == 1 ? '下架' : '上架' }}
+                    </el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 6 }">删除</el-dropdown-item>
                     <el-dropdown-item :command="{ id: row.id, type: 7 }">
                       更新昨日营业额
@@ -246,7 +250,7 @@
           label: '营业状态',
           align: 'center',
           formatter: (row) => {
-            return row.support_status === 1 ? '营业中' : '未营业'
+            return row.support_status == 1 ? '已营业' : '营业'
           }
         },
         {
@@ -314,22 +318,32 @@
       editPwdDialogRef.value.openDialog({ ...command, type: 1 })
     } else if (command.type == 4) {
       agentFreeze({
-        id: command.id
+        id: command.detail.id,
+        frozen: command.detail.is_frozen == 1 ? 0 : 1
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('冻结成功')
+          if (command.detail.is_frozen == 1) {
+            ElMessage.success('解冻成功')
+          } else {
+            ElMessage.success('冻结成功')
+          }
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')
         }
       })
     } else if (command.type == 5) {
+      // type 传1上架 2下架
+      let msg = '上架成功'
+      if (command.kind == 1) {
+        msg = '下架成功'
+      }
       agentTakeDown({
         id: command.id,
-        is_take_down: command.is_take_down
+        type: command.kind == 1 ? 2 : 1
       }).then((res) => {
         if (res.code === 200) {
-          ElMessage.success('下架成功')
+          ElMessage.success(msg)
           handleSearch()
         } else {
           ElMessage.error(res.msg || '操作失败')
